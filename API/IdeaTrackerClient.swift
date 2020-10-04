@@ -25,6 +25,28 @@ public struct IdeaTrackerClient {
         client.send(request, completion)
     }
     
+    public func createUser(
+        _ user: PrivateUserData,
+        _ completion: @escaping (Result<PublicUserData, NKError.RequestError>) -> Void
+    ) {
+        let request = Request(url: .adminURL, path: "/users", method: .post)
+            .addHeader(key: "Authorization", val: "Bearer 9ysy0fEa7oZTlCEGONiAZA==")
+            .addHeader(key: "Content-Type", val: "application/json")
+            .setBody(fromObject: user)
+            .decode(to: PublicUserData.self)
+        client.send(request, completion)
+    }
+    
+    public func deleteUser(
+        withId id: String,
+        _ completion: @escaping (Result<IgnoreResponse, NKError.RequestError>) -> Void
+    ) {
+        let request = Request(url: .adminURL, path: "/users/\(id)", method: .delete)
+            .addHeader(key: "Authorization", val: "Bearer 9ysy0fEa7oZTlCEGONiAZA==")
+            .ignoreResponse()
+        client.send(request, completion)
+    }
+    
 }
 
 extension URL {

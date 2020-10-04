@@ -1,0 +1,3 @@
+module "IdeaTrackerAPI" {
+  header "../api-Swift.h"
+}

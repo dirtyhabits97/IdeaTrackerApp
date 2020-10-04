@@ -17,6 +17,8 @@ public struct IdeaTrackerClient {
         self.client = client
     }
     
+    // MARK: - User methods
+    
     public func getUsers(_ completion: @escaping (Result<[PublicUserData], NKError.RequestError>) -> Void) {
         let request = Request(url: .adminURL, path: "/users", method: .get)
             // TODO: find a better way to get this token
@@ -44,6 +46,16 @@ public struct IdeaTrackerClient {
         let request = Request(url: .adminURL, path: "/users/\(id)", method: .delete)
             .addHeader(key: "Authorization", val: "Bearer 9ysy0fEa7oZTlCEGONiAZA==")
             .ignoreResponse()
+        client.send(request, completion)
+    }
+    
+    // MARK: - Idea methods
+    
+    public func getIdeas(_ completion: @escaping (Result<[Idea], NKError.RequestError>) -> Void) {
+        let request = Request(url: .adminURL, path: "/ideas", method: .get)
+            // TODO: find a better way to get this token
+            .addHeader(key: "Authorization", val: "Bearer 9ysy0fEa7oZTlCEGONiAZA==")
+            .decode(to: [Idea].self)
         client.send(request, completion)
     }
     

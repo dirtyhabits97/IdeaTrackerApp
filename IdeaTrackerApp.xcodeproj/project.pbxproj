@@ -9,12 +9,18 @@
 /* Begin PBXBuildFile section */
 		07F7FAF0DD99E9A184949CCC /* IdeaTrackerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5825DDF588EFC67448473AC6 /* IdeaTrackerClient.swift */; };
 		0CA6212B06BC13FEBFD21AAC /* IdeaTrackerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5825DDF588EFC67448473AC6 /* IdeaTrackerClient.swift */; };
-		28C3964C8FE577B4578DF37E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA7BCDA7A86FFEC008E16FF /* ViewController.swift */; };
+		28C3964C8FE577B4578DF37E /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA7BCDA7A86FFEC008E16FF /* UserListViewController.swift */; };
 		50960D1A9A8AF684C806FA09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F346EA9DFC91F5D8BE57CB2 /* LaunchScreen.storyboard */; };
 		8407468225299CBE00C13A60 /* LeanNetworkKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D87DBEE0FDC91B8148482D21 /* LeanNetworkKit.framework */; };
 		8407468325299CBE00C13A60 /* LeanNetworkKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D87DBEE0FDC91B8148482D21 /* LeanNetworkKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		84074699252A324D00C13A60 /* UserListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84074698252A324D00C13A60 /* UserListViewModel.swift */; };
 		8407469E252A34F700C13A60 /* UserListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407469D252A34F700C13A60 /* UserListCell.swift */; };
+		840746A9252A561800C13A60 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840746A8252A561800C13A60 /* TabBarController.swift */; };
+		840746B0252A57E900C13A60 /* IdeaListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840746AF252A57E900C13A60 /* IdeaListViewController.swift */; };
+		840746B5252A59A600C13A60 /* Idea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840746B4252A59A600C13A60 /* Idea.swift */; };
+		840746B6252A59A600C13A60 /* Idea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840746B4252A59A600C13A60 /* Idea.swift */; };
+		840746C3252A5A8F00C13A60 /* IdeaListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840746BA252A5A0100C13A60 /* IdeaListCell.swift */; };
+		840746C8252A5B3D00C13A60 /* IdeaListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840746C7252A5B3D00C13A60 /* IdeaListViewModel.swift */; };
 		87E2F017DB82EB01CDAB9908 /* libapp-lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B95F616A9224ACE1B138EC11 /* libapp-lib.a */; };
 		8AA22A034A6F2C16562DA572 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DCCE7AF4B846ED47285EE7 /* User.swift */; };
 		AE7605C068D81D7E98E2F852 /* libapi-ios-11.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6A6193AE04EBD989099573 /* libapi-ios-11.0.a */; };
@@ -63,8 +69,13 @@
 		5825DDF588EFC67448473AC6 /* IdeaTrackerClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaTrackerClient.swift; sourceTree = "<group>"; };
 		84074698252A324D00C13A60 /* UserListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewModel.swift; sourceTree = "<group>"; };
 		8407469D252A34F700C13A60 /* UserListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListCell.swift; sourceTree = "<group>"; };
+		840746A8252A561800C13A60 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		840746AF252A57E900C13A60 /* IdeaListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaListViewController.swift; sourceTree = "<group>"; };
+		840746B4252A59A600C13A60 /* Idea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Idea.swift; sourceTree = "<group>"; };
+		840746BA252A5A0100C13A60 /* IdeaListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaListCell.swift; sourceTree = "<group>"; };
+		840746C7252A5B3D00C13A60 /* IdeaListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaListViewModel.swift; sourceTree = "<group>"; };
 		99AF9B8440D95029F9D33D80 /* libapi-ios-14.0.a */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libapi-ios-14.0.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9AA7BCDA7A86FFEC008E16FF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9AA7BCDA7A86FFEC008E16FF /* UserListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
 		9C14371740BB60C3ED69BB48 /* Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stub.swift; sourceTree = "<group>"; };
 		9F346EA9DFC91F5D8BE57CB2 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9FC418FBA6CB499E5C5AE6B8 /* BUILD */ = {isa = PBXFileReference; lastKnownFileType = text; path = BUILD; sourceTree = "<group>"; };
@@ -101,6 +112,7 @@
 			children = (
 				84074697252A322900C13A60 /* Scenes */,
 				14C896DB629A9EA19F03B165 /* AppDelegate.swift */,
+				840746A8252A561800C13A60 /* TabBarController.swift */,
 				EF8F82682279D8C3B2DC1CBD /* Assets.xcassets */,
 				4BD5149B695B9195A66AE5A3 /* Info.plist */,
 				9F346EA9DFC91F5D8BE57CB2 /* LaunchScreen.storyboard */,
@@ -124,6 +136,7 @@
 			children = (
 				5825DDF588EFC67448473AC6 /* IdeaTrackerClient.swift */,
 				10DCCE7AF4B846ED47285EE7 /* User.swift */,
+				840746B4252A59A600C13A60 /* Idea.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -146,11 +159,30 @@
 		84074697252A322900C13A60 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				84074698252A324D00C13A60 /* UserListViewModel.swift */,
-				8407469D252A34F700C13A60 /* UserListCell.swift */,
-				9AA7BCDA7A86FFEC008E16FF /* ViewController.swift */,
+				840746AE252A57DE00C13A60 /* IdeaList */,
+				840746AD252A57D500C13A60 /* UserList */,
 			);
 			path = Scenes;
+			sourceTree = "<group>";
+		};
+		840746AD252A57D500C13A60 /* UserList */ = {
+			isa = PBXGroup;
+			children = (
+				84074698252A324D00C13A60 /* UserListViewModel.swift */,
+				8407469D252A34F700C13A60 /* UserListCell.swift */,
+				9AA7BCDA7A86FFEC008E16FF /* UserListViewController.swift */,
+			);
+			path = UserList;
+			sourceTree = "<group>";
+		};
+		840746AE252A57DE00C13A60 /* IdeaList */ = {
+			isa = PBXGroup;
+			children = (
+				840746AF252A57E900C13A60 /* IdeaListViewController.swift */,
+				840746C7252A5B3D00C13A60 /* IdeaListViewModel.swift */,
+				840746BA252A5A0100C13A60 /* IdeaListCell.swift */,
+			);
+			path = IdeaList;
 			sourceTree = "<group>";
 		};
 		C29047A821B75029D057E21B /* IdeaTrackerApp.xcodeproj */ = {
@@ -421,6 +453,7 @@
 			files = (
 				0CA6212B06BC13FEBFD21AAC /* IdeaTrackerClient.swift in Sources */,
 				8AA22A034A6F2C16562DA572 /* User.swift in Sources */,
+				840746B6252A59A600C13A60 /* Idea.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +470,7 @@
 			files = (
 				07F7FAF0DD99E9A184949CCC /* IdeaTrackerClient.swift in Sources */,
 				B164ACC766082BFE423FB647 /* User.swift in Sources */,
+				840746B5252A59A600C13A60 /* Idea.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,9 +479,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				8407469E252A34F700C13A60 /* UserListCell.swift in Sources */,
+				840746B0252A57E900C13A60 /* IdeaListViewController.swift in Sources */,
 				ECF7674BCF9526F1597C33AA /* AppDelegate.swift in Sources */,
 				84074699252A324D00C13A60 /* UserListViewModel.swift in Sources */,
-				28C3964C8FE577B4578DF37E /* ViewController.swift in Sources */,
+				840746A9252A561800C13A60 /* TabBarController.swift in Sources */,
+				840746C8252A5B3D00C13A60 /* IdeaListViewModel.swift in Sources */,
+				28C3964C8FE577B4578DF37E /* UserListViewController.swift in Sources */,
+				840746C3252A5A8F00C13A60 /* IdeaListCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

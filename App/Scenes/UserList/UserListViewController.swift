@@ -8,10 +8,18 @@
 import UIKit
 import IdeaTrackerAPI
 
+protocol ErrorHandler: AnyObject {
+    
+    func handleError(_ message: String)
+    
+}
+
 // TODO: create toast view to notify changes
-class ViewController: UIViewController {
+class UserListViewController: UIViewController {
     
     // MARK: - Properties
+    
+    weak var errorHandler: ErrorHandler?
     
     var viewModel: UserListViewModel?
     
@@ -25,12 +33,6 @@ class ViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
-    }()
-    
-    lazy var errorAlert: UIAlertController = {
-        let alert = UIAlertController(title: "Oops", message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        return alert
     }()
     
     // MARK: - Lifecycle
@@ -82,18 +84,23 @@ class ViewController: UIViewController {
     }
     
     private func setupBindings() {
+        viewModel?.isLoading = { [weak self] isLoading in
+            guard let self = self else { return }
+            if isLoading {
+                // TODO: show and indicator
+            } else {
+                self.tableView.refreshControl?.endRefreshing()
+            }
+        }
         viewModel?.onFailure = { [weak self] error in
             guard let self = self else { return }
             var message = ""
             message += "description: \(error.localizedDescription)\n"
             message += "error:\n\(error)"
-            self.errorAlert.message = message
-            self.present(self.errorAlert, animated: true)
-            self.tableView.refreshControl?.endRefreshing()
+            self.errorHandler?.handleError(message)
         }
         viewModel?.onListSucess = { [weak self] users in
             guard let self = self else { return }
-            self.tableView.refreshControl?.endRefreshing()
             self.displayedUsers = users
             self.tableView.reloadData()
         }
@@ -143,7 +150,7 @@ class ViewController: UIViewController {
     
 }
 
-extension ViewController: UITableViewDataSource {
+extension UserListViewController: UITableViewDataSource {
     
     func tableView(
         _ tableView: UITableView,
@@ -178,7 +185,7 @@ extension ViewController: UITableViewDataSource {
     
 }
 
-extension ViewController: UITableViewDelegate {
+extension UserListViewController: UITableViewDelegate {
     
     func tableView(
         _ tableView: UITableView,

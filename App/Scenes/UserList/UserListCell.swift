@@ -9,9 +9,11 @@ import Foundation
 import UIKit
 import IdeaTrackerAPI
 
-class UserListCell: UITableViewCell {
+class UserListCell: BaseCell<PublicUserData> {
     
     static let reuseIdentifier = "UserListCell"
+    
+    // MARK: - UI elements
     
     let stackView: UIStackView = {
         let stackView = UIStackView()
@@ -36,20 +38,9 @@ class UserListCell: UITableViewCell {
         return label
     }()
     
-    override init(
-        style: UITableViewCell.CellStyle,
-        reuseIdentifier: String?
-    ) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        initializeView()
-    }
+    // MARK: - Lifecycle
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        initializeView()
-    }
-    
-    func initializeView() {
+    override func initializeView() {
         contentView.addSubview(stackView)
         stackView.addArrangedSubview(usernameLabel)
         stackView.addArrangedSubview(nameLabel)
@@ -62,7 +53,9 @@ class UserListCell: UITableViewCell {
         ])
     }
     
-    func configure(for user: PublicUserData) {
+    // MARK: - Methods
+    
+    override func configure(for user: PublicUserData) {
         usernameLabel.text = user.username
         var text = user.name
         if let id = user.id?.uuidString {

@@ -21,6 +21,9 @@
 		840746B6252A59A600C13A60 /* Idea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840746B4252A59A600C13A60 /* Idea.swift */; };
 		840746C3252A5A8F00C13A60 /* IdeaListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840746BA252A5A0100C13A60 /* IdeaListCell.swift */; };
 		840746C8252A5B3D00C13A60 /* IdeaListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840746C7252A5B3D00C13A60 /* IdeaListViewModel.swift */; };
+		840746CD252A726600C13A60 /* SelectUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840746CC252A726600C13A60 /* SelectUserViewController.swift */; };
+		840746D3252A72D600C13A60 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840746D2252A72D600C13A60 /* BaseCell.swift */; };
+		840746D9252A77D300C13A60 /* CreateIdeaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840746D8252A77D300C13A60 /* CreateIdeaViewController.swift */; };
 		87E2F017DB82EB01CDAB9908 /* libapp-lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B95F616A9224ACE1B138EC11 /* libapp-lib.a */; };
 		8AA22A034A6F2C16562DA572 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DCCE7AF4B846ED47285EE7 /* User.swift */; };
 		AE7605C068D81D7E98E2F852 /* libapi-ios-11.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6A6193AE04EBD989099573 /* libapi-ios-11.0.a */; };
@@ -74,6 +77,9 @@
 		840746B4252A59A600C13A60 /* Idea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Idea.swift; sourceTree = "<group>"; };
 		840746BA252A5A0100C13A60 /* IdeaListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaListCell.swift; sourceTree = "<group>"; };
 		840746C7252A5B3D00C13A60 /* IdeaListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaListViewModel.swift; sourceTree = "<group>"; };
+		840746CC252A726600C13A60 /* SelectUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUserViewController.swift; sourceTree = "<group>"; };
+		840746D2252A72D600C13A60 /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
+		840746D8252A77D300C13A60 /* CreateIdeaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdeaViewController.swift; sourceTree = "<group>"; };
 		99AF9B8440D95029F9D33D80 /* libapi-ios-14.0.a */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libapi-ios-14.0.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AA7BCDA7A86FFEC008E16FF /* UserListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
 		9C14371740BB60C3ED69BB48 /* Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stub.swift; sourceTree = "<group>"; };
@@ -159,6 +165,8 @@
 		84074697252A322900C13A60 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				840746D1252A72CE00C13A60 /* Helper */,
+				840746D7252A779600C13A60 /* CreateIdea */,
 				840746AE252A57DE00C13A60 /* IdeaList */,
 				840746AD252A57D500C13A60 /* UserList */,
 			);
@@ -183,6 +191,23 @@
 				840746BA252A5A0100C13A60 /* IdeaListCell.swift */,
 			);
 			path = IdeaList;
+			sourceTree = "<group>";
+		};
+		840746D1252A72CE00C13A60 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				840746D2252A72D600C13A60 /* BaseCell.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		840746D7252A779600C13A60 /* CreateIdea */ = {
+			isa = PBXGroup;
+			children = (
+				840746CC252A726600C13A60 /* SelectUserViewController.swift */,
+				840746D8252A77D300C13A60 /* CreateIdeaViewController.swift */,
+			);
+			path = CreateIdea;
 			sourceTree = "<group>";
 		};
 		C29047A821B75029D057E21B /* IdeaTrackerApp.xcodeproj */ = {
@@ -478,6 +503,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				840746CD252A726600C13A60 /* SelectUserViewController.swift in Sources */,
 				8407469E252A34F700C13A60 /* UserListCell.swift in Sources */,
 				840746B0252A57E900C13A60 /* IdeaListViewController.swift in Sources */,
 				ECF7674BCF9526F1597C33AA /* AppDelegate.swift in Sources */,
@@ -485,7 +511,9 @@
 				840746A9252A561800C13A60 /* TabBarController.swift in Sources */,
 				840746C8252A5B3D00C13A60 /* IdeaListViewModel.swift in Sources */,
 				28C3964C8FE577B4578DF37E /* UserListViewController.swift in Sources */,
+				840746D3252A72D600C13A60 /* BaseCell.swift in Sources */,
 				840746C3252A5A8F00C13A60 /* IdeaListCell.swift in Sources */,
+				840746D9252A77D300C13A60 /* CreateIdeaViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

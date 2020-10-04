@@ -28,6 +28,8 @@ class IdeaListViewController: UIViewController {
         return tableView
     }()
     
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()

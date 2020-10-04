@@ -9,7 +9,9 @@ import Foundation
 import UIKit
 import IdeaTrackerAPI
 
-class IdeaListCell: UITableViewCell {
+class IdeaListCell: BaseCell<Idea> {
+    
+    // MARK: - Properties
     
     static let reuseIdentifier = "IdeaListCell"
     
@@ -40,20 +42,7 @@ class IdeaListCell: UITableViewCell {
     
     // MARK: - Lifecycle
     
-    override init(
-        style: UITableViewCell.CellStyle,
-        reuseIdentifier: String?
-    ) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        initializeView()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        initializeView()
-    }
-    
-    func initializeView() {
+    override func initializeView() {
         contentView.addSubview(stackView)
         stackView.addArrangedSubview(nameLabel)
         stackView.addArrangedSubview(descriptionLabel)
@@ -68,7 +57,7 @@ class IdeaListCell: UITableViewCell {
     
     // MARK: - Methods
     
-    func configure(for idea: Idea) {
+    override func configure(for idea: Idea) {
         nameLabel.text = idea.name
         descriptionLabel.text = idea.description
     }

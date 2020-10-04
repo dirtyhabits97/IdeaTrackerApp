@@ -8,7 +8,7 @@
 import Foundation
 import LeanNetworkKit
 
-public struct IdeaTrackerAPI {
+public struct IdeaTrackerClient {
     
     private unowned let client: HTTPClient
     private static let token = "qi6IWbrB0m2GeSa3jXHnkw=="

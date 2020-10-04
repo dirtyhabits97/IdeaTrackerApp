@@ -1,6 +1,5 @@
 load("@build_bazel_rules_apple//apple:ios.bzl", "ios_application")
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
-load("@build_bazel_rules_apple//apple:apple.bzl", "apple_dynamic_framework_import")
 
 ios_application(
     name = "app",
@@ -10,29 +9,25 @@ ios_application(
     infoplists = ["App/Info.plist"],
     launch_storyboard = "App/LaunchScreen.storyboard",
     resources = ["App/Assets.xcassets"],
-    deps = [":app-lib",":api"]
+    deps = [":app-lib"]
 )
 
 swift_library(
     name = "app-lib",
     module_name = "IdeaTrackerApp",
     srcs = glob([
-        "App/*.swift"
+        "App/**/*.swift"
     ]),
     visibility = ["//visibility:public"],
-    deps = [":LeanNetworkKit"]
+    deps = ["//Carthage:LeanNetworkKit", ":api"]
 )
 
 swift_library(
     name = "api",
     module_name = "IdeaTrackerAPI",
     srcs = glob([
-        "API/*.swift",
+        "API/**/*.swift",
     ]),
-    deps = [":LeanNetworkKit"]
-)
-
-apple_dynamic_framework_import(
-    name = "LeanNetworkKit",
-    framework_imports = glob(["Carthage/Build/iOS/LeanNetworkKit.framework/**"])
+    visibility = ["//visibility:public"],
+    deps = ["//Carthage:LeanNetworkKit"]
 )

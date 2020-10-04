@@ -37,13 +37,12 @@ let client = HTTPClient(urlSession: URLSession(configuration: .ephemeral))
 
 class ViewController: UIViewController {
     
-    let api = IdeaTrackerAPI(client: client)
+    let api = IdeaTrackerClient(client: client)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBlue
         testAPI()
-        
         let button = UIButton(type: .system)
         button.setTitle("Press me", for: .normal)
         button.tintColor = .white

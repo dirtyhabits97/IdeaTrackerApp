@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		07F7FAF0DD99E9A184949CCC /* IdeaTrackerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5825DDF588EFC67448473AC6 /* IdeaTrackerAPI.swift */; };
-		0CA6212B06BC13FEBFD21AAC /* IdeaTrackerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5825DDF588EFC67448473AC6 /* IdeaTrackerAPI.swift */; };
+		07F7FAF0DD99E9A184949CCC /* IdeaTrackerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5825DDF588EFC67448473AC6 /* IdeaTrackerClient.swift */; };
+		0CA6212B06BC13FEBFD21AAC /* IdeaTrackerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5825DDF588EFC67448473AC6 /* IdeaTrackerClient.swift */; };
 		28C3964C8FE577B4578DF37E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA7BCDA7A86FFEC008E16FF /* ViewController.swift */; };
 		50960D1A9A8AF684C806FA09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F346EA9DFC91F5D8BE57CB2 /* LaunchScreen.storyboard */; };
 		8407468225299CBE00C13A60 /* LeanNetworkKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D87DBEE0FDC91B8148482D21 /* LeanNetworkKit.framework */; };
@@ -58,7 +58,7 @@
 		10DCCE7AF4B846ED47285EE7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		14C896DB629A9EA19F03B165 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4BD5149B695B9195A66AE5A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		5825DDF588EFC67448473AC6 /* IdeaTrackerAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaTrackerAPI.swift; sourceTree = "<group>"; };
+		5825DDF588EFC67448473AC6 /* IdeaTrackerClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaTrackerClient.swift; sourceTree = "<group>"; };
 		99AF9B8440D95029F9D33D80 /* libapi-ios-14.0.a */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libapi-ios-14.0.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AA7BCDA7A86FFEC008E16FF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9C14371740BB60C3ED69BB48 /* Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stub.swift; sourceTree = "<group>"; };
@@ -118,7 +118,7 @@
 		594C607946E35E7492754605 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				5825DDF588EFC67448473AC6 /* IdeaTrackerAPI.swift */,
+				5825DDF588EFC67448473AC6 /* IdeaTrackerClient.swift */,
 				10DCCE7AF4B846ED47285EE7 /* User.swift */,
 			);
 			path = API;
@@ -405,7 +405,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0CA6212B06BC13FEBFD21AAC /* IdeaTrackerAPI.swift in Sources */,
+				0CA6212B06BC13FEBFD21AAC /* IdeaTrackerClient.swift in Sources */,
 				8AA22A034A6F2C16562DA572 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -421,7 +421,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				07F7FAF0DD99E9A184949CCC /* IdeaTrackerAPI.swift in Sources */,
+				07F7FAF0DD99E9A184949CCC /* IdeaTrackerClient.swift in Sources */,
 				B164ACC766082BFE423FB647 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

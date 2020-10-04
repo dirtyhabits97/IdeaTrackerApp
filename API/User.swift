@@ -9,8 +9,8 @@ import Foundation
 
 public struct PublicUserData: Codable {
     
-    let id: UUID?
-    let name: String
-    let username: String
+    public let id: UUID?
+    public let name: String
+    public let username: String
     
 }

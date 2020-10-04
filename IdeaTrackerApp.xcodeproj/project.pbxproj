@@ -13,6 +13,8 @@
 		50960D1A9A8AF684C806FA09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F346EA9DFC91F5D8BE57CB2 /* LaunchScreen.storyboard */; };
 		8407468225299CBE00C13A60 /* LeanNetworkKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D87DBEE0FDC91B8148482D21 /* LeanNetworkKit.framework */; };
 		8407468325299CBE00C13A60 /* LeanNetworkKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D87DBEE0FDC91B8148482D21 /* LeanNetworkKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		84074699252A324D00C13A60 /* UserListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84074698252A324D00C13A60 /* UserListViewModel.swift */; };
+		8407469E252A34F700C13A60 /* UserListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407469D252A34F700C13A60 /* UserListCell.swift */; };
 		87E2F017DB82EB01CDAB9908 /* libapp-lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B95F616A9224ACE1B138EC11 /* libapp-lib.a */; };
 		8AA22A034A6F2C16562DA572 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DCCE7AF4B846ED47285EE7 /* User.swift */; };
 		AE7605C068D81D7E98E2F852 /* libapi-ios-11.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6A6193AE04EBD989099573 /* libapi-ios-11.0.a */; };
@@ -59,6 +61,8 @@
 		14C896DB629A9EA19F03B165 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4BD5149B695B9195A66AE5A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		5825DDF588EFC67448473AC6 /* IdeaTrackerClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaTrackerClient.swift; sourceTree = "<group>"; };
+		84074698252A324D00C13A60 /* UserListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewModel.swift; sourceTree = "<group>"; };
+		8407469D252A34F700C13A60 /* UserListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListCell.swift; sourceTree = "<group>"; };
 		99AF9B8440D95029F9D33D80 /* libapi-ios-14.0.a */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libapi-ios-14.0.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AA7BCDA7A86FFEC008E16FF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9C14371740BB60C3ED69BB48 /* Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stub.swift; sourceTree = "<group>"; };
@@ -95,11 +99,11 @@
 		391282D660D8C80249472F31 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				84074697252A322900C13A60 /* Scenes */,
 				14C896DB629A9EA19F03B165 /* AppDelegate.swift */,
 				EF8F82682279D8C3B2DC1CBD /* Assets.xcassets */,
 				4BD5149B695B9195A66AE5A3 /* Info.plist */,
 				9F346EA9DFC91F5D8BE57CB2 /* LaunchScreen.storyboard */,
-				9AA7BCDA7A86FFEC008E16FF /* ViewController.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -138,6 +142,16 @@
 			sourceTree = "<group>";
 			tabWidth = 4;
 			usesTabs = 0;
+		};
+		84074697252A322900C13A60 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				84074698252A324D00C13A60 /* UserListViewModel.swift */,
+				8407469D252A34F700C13A60 /* UserListCell.swift */,
+				9AA7BCDA7A86FFEC008E16FF /* ViewController.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
 		};
 		C29047A821B75029D057E21B /* IdeaTrackerApp.xcodeproj */ = {
 			isa = PBXGroup;
@@ -430,7 +444,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8407469E252A34F700C13A60 /* UserListCell.swift in Sources */,
 				ECF7674BCF9526F1597C33AA /* AppDelegate.swift in Sources */,
+				84074699252A324D00C13A60 /* UserListViewModel.swift in Sources */,
 				28C3964C8FE577B4578DF37E /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

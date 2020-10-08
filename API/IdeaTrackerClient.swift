@@ -77,6 +77,16 @@ public struct IdeaTrackerClient {
         client.send(request, completion)
     }
     
+    public func deleteIdea(
+        withId id: String,
+        _ completion: @escaping (Result<IgnoreResponse, NKError.RequestError>) -> Void
+    ) {
+        let request = Request(url: .adminURL, path: "/ideas/\(id)", method: .delete)
+            .addHeader(key: "Authorization", val: "Bearer 9ysy0fEa7oZTlCEGONiAZA==")
+            .ignoreResponse()
+        client.send(request, completion)
+    }
+    
 }
 
 extension URL {

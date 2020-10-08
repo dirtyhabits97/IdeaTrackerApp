@@ -20,6 +20,7 @@ class IdeaListViewModel {
     var onFailure: ((Error) -> Void)?
     
     var onListSucess: (([Idea]) -> Void)?
+    var onDeleteSuccess: (() -> Void)?
     
     // MARK: - Lifecycle
     
@@ -44,6 +45,23 @@ class IdeaListViewModel {
             }
         }
         
+    }
+    
+    func deleteIdea(with id: UUID?) {
+        guard let id = id?.uuidString else { return }
+        // TODO: implement this
+        client.deleteIdea(withId: id) { (result) in
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.isLoading?(false)
+                switch result {
+                case .success:
+                    self.onDeleteSuccess?()
+                case .failure(let error):
+                    self.onFailure?(error)
+                }
+            }
+        }
     }
     
 }

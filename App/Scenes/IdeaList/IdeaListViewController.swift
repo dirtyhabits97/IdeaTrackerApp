@@ -45,6 +45,12 @@ class IdeaListViewController: UIViewController {
         view.backgroundColor = .white
         // navigation attributes
         navigationItem.title = "Ideas"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            title: "Edit",
+            style: .plain,
+            target: self,
+            action: #selector(didPressEditModeButton)
+        )
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .add,
             target: self,
@@ -84,6 +90,9 @@ class IdeaListViewController: UIViewController {
             self.displayedIdeas = ideas
             self.tableView.reloadData()
         }
+        viewModel?.onDeleteSuccess = {
+            print("deleted idea")
+        }
     }
     
     // MARK: - Interaction handling
@@ -102,6 +111,15 @@ class IdeaListViewController: UIViewController {
             viewController,
             animated: true
         )
+    }
+    
+    @objc func didPressEditModeButton() {
+        tableView.setEditing(!tableView.isEditing, animated: true)
+        if tableView.isEditing {
+            navigationItem.leftBarButtonItem?.title = "Done"
+        } else {
+            navigationItem.leftBarButtonItem?.title = "Edit"
+        }
     }
     
 }
@@ -124,6 +142,19 @@ extension IdeaListViewController: UITableViewDataSource {
         }
         cell.configure(for: displayedIdeas[indexPath.row])
         return cell
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        commit editingStyle: UITableViewCell.EditingStyle,
+        forRowAt indexPath: IndexPath
+    ) {
+        guard editingStyle == .delete else { return }
+        // model updates
+        viewModel?.deleteIdea(with: displayedIdeas[indexPath.row].id)
+        // view updates
+        displayedIdeas.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .fade)
     }
     
 }

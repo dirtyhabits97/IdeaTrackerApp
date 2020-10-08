@@ -1,6 +1,6 @@
 targets:
-  - ":app"
-  - ":api"
+  - "//App:app"
+  - "//API:IdeaTrackerAPI"
 
 projects:
   "IdeaTrackerApp":

@@ -14,7 +14,6 @@ ios_application(
 
 swift_library(
     name = "IdeaTrackerAppLib",
-    module_name = "IdeaTrackerApp",
     srcs = glob([
         "**/*.swift"
     ]),

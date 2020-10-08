@@ -12,7 +12,7 @@ class IdeaListViewModel {
     
     // MARK: - Properties
     
-    private let client: IdeaTrackerClient
+    let client: IdeaTrackerClient
     
     // MARK: - Callbacks
     

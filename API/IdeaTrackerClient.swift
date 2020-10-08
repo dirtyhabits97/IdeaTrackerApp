@@ -59,10 +59,36 @@ public struct IdeaTrackerClient {
         client.send(request, completion)
     }
     
+    public func saveIdea(
+        _ name: String,
+        description: String,
+        userId: UUID,
+        _ completion: @escaping (Result<IgnoreResponse, NKError.RequestError>) -> Void
+    ) {
+        let request = Request(url: .adminURL, path: "/ideas", method: .post)
+            .addHeader(key: "Authorization", val: "Bearer 9ysy0fEa7oZTlCEGONiAZA==")
+            .addHeader(key: "Content-Type", val: "application/json")
+            .setBody(fromObject: CreateIdea(
+                        name: name,
+                        description: description,
+                        userId: userId
+            ))
+            .ignoreResponse()
+        client.send(request, completion)
+    }
+    
 }
 
 extension URL {
     
     static let adminURL = URL(string: "http://localhost:8080/api/admin")!
+    
+}
+
+private struct CreateIdea: Encodable {
+    
+    let name: String
+    let description: String
+    let userId: UUID
     
 }

@@ -34,6 +34,10 @@ class IdeaListViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         setupBindings()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         viewModel?.loadData()
     }
     
@@ -41,6 +45,11 @@ class IdeaListViewController: UIViewController {
         view.backgroundColor = .white
         // navigation attributes
         navigationItem.title = "Ideas"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .add,
+            target: self,
+            action: #selector(didPressAddIdeaButton)
+        )
         // refresh controller
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(
@@ -58,12 +67,7 @@ class IdeaListViewController: UIViewController {
         )
         // set up the layout
         view.addSubview(tableView)
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        ])
+        tableView.pinToSuperview()
     }
     
     private func setupBindings() {
@@ -86,6 +90,18 @@ class IdeaListViewController: UIViewController {
     
     @objc func didPullToRefresh() {
         viewModel?.loadData()
+    }
+    
+    @objc func didPressAddIdeaButton() {
+        // TODO: introduce coordinator
+        guard let viewModel = viewModel else { return }
+        let viewController = CreateIdeaViewController()
+        viewController.viewModel = CreateIdeaViewModel(client: viewModel.client)
+        // TODO: set the error handler from the coordinator
+        navigationController?.pushViewController(
+            viewController,
+            animated: true
+        )
     }
     
 }

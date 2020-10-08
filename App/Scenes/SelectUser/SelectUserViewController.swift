@@ -13,6 +13,8 @@ class SelectUserViewController: UITableViewController {
     
     var users: [PublicUserData] = []
     
+    var onSelectUser: ((PublicUserData) -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Users"
@@ -30,12 +32,23 @@ class SelectUserViewController: UITableViewController {
         users.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Cell.reuseIdentifier, for: indexPath) as? Cell else {
             return UITableViewCell()
         }
         cell.configure(for: users[indexPath.row])
         return cell
+    }
+    
+    override func tableView(
+        _ tableView: UITableView,
+        didSelectRowAt indexPath: IndexPath
+    ) {
+        onSelectUser?(users[indexPath.row])
+        navigationController?.popViewController(animated: true)
     }
     
 }

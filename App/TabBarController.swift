@@ -66,16 +66,21 @@ extension TabBarController: ErrorHandler {
 
 let httpClient = HTTPClient(urlSession: URLSession(configuration: .ephemeral))
     .observeRequests(requestWillLoad: { (request) in
-        var str = request.httpMethod?.uppercased() ?? "-"
+        var str = "⬆️\t" + (request.httpMethod?.uppercased() ?? "-")
         str += "\t"
         str += request.url?.absoluteString ?? "-"
         str += "\n"
+        str += "Headers: [\n"
         for (key, val) in request.allHTTPHeaderFields ?? [:] {
             str += "\t\(key):\t\(val)\n"
         }
+        str += "]"
         print(str)
     }, requestDidLoad: { (req, res, data) in
-        var str = "Headers: [\n"
+        var str = "⬇️\t" + (req.httpMethod?.uppercased() ?? "-")
+        str += "\t\(req.url?.absoluteString ?? "-")"
+        str += "\t\(res.statusCode)\n"
+        str += "Headers: [\n"
         for (key, val) in res.allHeaderFields {
             str += "\t\(key):\t\(val)\n"
         }

@@ -1,5 +1,5 @@
 targets:
-  - "//App:app"
+  - "//App:IdeaTrackerApp"
   - "//API:IdeaTrackerAPI"
 
 projects:

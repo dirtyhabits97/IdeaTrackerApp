@@ -1,3 +1,0 @@
-module "IdeaTrackerApp" {
-  header "../app-lib-Swift.h"
-}

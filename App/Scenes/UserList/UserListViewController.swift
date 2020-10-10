@@ -8,7 +8,6 @@
 import UIKit
 import IdeaTrackerAPI
 
-// TODO: use private user data for the user list, since the user app is not going to have this
 // TODO: create toast view to notify changes
 class UserListViewController: ListViewController {
     
@@ -66,6 +65,10 @@ class UserListViewController: ListViewController {
         viewModel?.onDeleteSuccess = {
             print("deleted user")
         }
+        viewModel?.onUpdateSuccess = { [weak self] (idx, user) in
+            guard let self = self else { return }
+            self.dataSource?.replaceItem(at: idx, with: user)
+        }
         // MARK: data source bindings
         dataSource?.willDelete = { [weak self] user in
             self?.viewModel?.deleteUser(withId: user.id)
@@ -84,17 +87,21 @@ class UserListViewController: ListViewController {
                 $0.placeholder = "password"
             })
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            alert.addAction(UIAlertAction(title: "Submit", style: .default, handler: { [weak self] (_) in
+            alert.addAction(UIAlertAction(title: "Update", style: .default, handler: { [weak self] (_) in
                 guard
+                    let self = self,
                     let name = alert.textFields?[0].text,
                     let username = alert.textFields?[1].text,
                     let password = alert.textFields?[2].text
                 else {
                     return
                 }
-                self?.viewModel?.createUser(name: name, username: username, password: password)
+                var copy = user
+                copy.name = name
+                copy.username = username
+                self.viewModel?.updateUser(copy, password: password, at: idx)
             }))
-            present(alert, animated: true)
+            self.present(alert, animated: true)
         }
     }
     

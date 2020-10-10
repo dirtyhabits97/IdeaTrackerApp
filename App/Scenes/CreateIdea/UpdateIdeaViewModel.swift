@@ -58,6 +58,11 @@ class UpdateIdeaViewModel: CreateIdeaViewModel {
     }
     
     override func saveIdea(_ name: String, _ description: String) {
+        // make sure something changed
+        if name == idea.name && idea.description == description {
+            onCreateIdeaSuccess?(idea)
+            return
+        }
         idea.name = name
         idea.description = description
         client.updateIdea(idea) { (result) in

@@ -55,6 +55,24 @@ public struct IdeaTrackerClient {
         client.send(request, completion)
     }
     
+    public func updateUser(
+        _ user: PublicUserData,
+        password: String,
+        _ completion: @escaping (Result<PublicUserData, NKError.RequestError>) -> Void
+    ) {
+        let request = Request(url: .adminURL, path: "/users/\(user.id.uuidString)", method: .put)
+            .addHeader(key: "Authorization", val: "Bearer 9ysy0fEa7oZTlCEGONiAZA==")
+            .addHeader(key: "Content-Type", val: "application/json")
+            .setBody(fromObject: CreateUser(
+                id: user.id,
+                name: user.name,
+                username: user.username,
+                password: password
+            ))
+            .decode(to: PublicUserData.self)
+        client.send(request, completion)
+    }
+    
     // MARK: - Idea methods
     
     public func getIdeas(_ completion: @escaping (Result<[Idea], NKError.RequestError>) -> Void) {
@@ -167,15 +185,18 @@ private struct CreateIdea: Encodable {
 
 private struct CreateUser: Encodable {
     
+    let id: UUID?
     let name: String
     let username: String
     let password: String
     
     init(
+        id: UUID? = nil,
         name: String,
         username: String,
         password: String
     ) {
+        self.id = id
         self.name = name
         self.username = username
         self.password = password

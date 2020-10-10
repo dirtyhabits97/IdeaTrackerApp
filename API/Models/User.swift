@@ -10,7 +10,7 @@ import Foundation
 public struct PublicUserData: Decodable {
     
     public let id: UUID
-    public let name: String
-    public let username: String
+    public var name: String
+    public var username: String
     
 }

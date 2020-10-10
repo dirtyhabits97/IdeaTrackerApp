@@ -68,4 +68,24 @@ class UserListViewModel: ListViewModel<PublicUserData> {
         }
     }
     
+    func updateUser(
+        _ user: PublicUserData,
+        password: String,
+        at index: Int
+    ) {
+        isLoading?(true)
+        client.updateUser(user, password: password) { (result) in
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.isLoading?(false)
+                switch result {
+                case .success(let user):
+                    self.onUpdateSuccess?(index, user)
+                case .failure(let error):
+                    self.onFailure?(error)
+                }
+            }
+        }
+    }
+    
 }

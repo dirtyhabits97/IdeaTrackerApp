@@ -20,6 +20,8 @@ class CategoryListViewController: ListViewController {
         set { dataSource?.displayedItems = newValue }
     }
     
+    // MARK: - UI elements
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -57,12 +59,33 @@ class CategoryListViewController: ListViewController {
         viewModel?.onDeleteSuccess = {
             print("deleted category")
         }
+        viewModel?.onUpdateSuccess = { [weak self] (idx, category) in
+            guard let self = self else { return }
+            self.dataSource?.replaceItem(at: idx, with: category)
+        }
         // MARK: data source bindings
         dataSource?.willDelete = { [weak self] category in
-            self?.viewModel?.deleteCategory(with: category.id)
+            guard let self = self else { return }
+            self.viewModel?.deleteCategory(with: category.id)
         }
-        dataSource?.didSelect = { category in
-            UIPasteboard.general.string = category.id.uuidString
+        dataSource?.didSelect = { [weak self] (idx, category) in
+            guard let self = self else { return }
+            let alert = UIAlertController(title: "Update category", message: nil, preferredStyle: .alert)
+            alert.addTextField(configurationHandler: {
+                $0.placeholder = "name"
+                $0.text = category.name
+            })
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Update", style: .default, handler: { [weak self] (_) in
+                guard
+                    let self = self,
+                    let name = alert.textFields?[0].text, name != category.name
+                else {
+                    return
+                }
+                self.viewModel?.updateCategory(self.displayedCategories[idx], at: idx)
+            }))
+            self.present(alert, animated: true)
         }
     }
     

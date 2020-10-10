@@ -28,7 +28,7 @@ class ListDataSource<Item, Cell: ConfigurableCell>: NSObject, UITableViewDataSou
     // MARK: - Observables
     
     var willDelete: ((Item) -> Void)?
-    var didSelect:  ((Item) -> Void)?
+    var didSelect:  ((Int, Item) -> Void)?
     
     // MARK: - Lifecycle
     
@@ -41,6 +41,8 @@ class ListDataSource<Item, Cell: ConfigurableCell>: NSObject, UITableViewDataSou
         )
         tableView.dataSource = self
         tableView.delegate = self
+        // set up the header and footer
+        
     }
     
     // MARK: - DataSource methods
@@ -83,7 +85,7 @@ class ListDataSource<Item, Cell: ConfigurableCell>: NSObject, UITableViewDataSou
         didSelectRowAt indexPath: IndexPath
     ) {
         tableView.deselectRow(at: indexPath, animated: false)
-        didSelect?(displayedItems[indexPath.row])
+        didSelect?(indexPath.row, displayedItems[indexPath.row])
     }
     
     // MARK: - Helper methods

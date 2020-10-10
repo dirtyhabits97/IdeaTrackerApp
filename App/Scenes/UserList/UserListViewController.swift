@@ -69,7 +69,7 @@ class UserListViewController: ListViewController {
         dataSource?.willDelete = { [weak self] user in
             self?.viewModel?.deleteUser(withId: user.id)
         }
-        dataSource?.didSelect = { user in
+        dataSource?.didSelect = { (idx, user) in
             UIPasteboard.general.string = user.id.uuidString
         }
     }

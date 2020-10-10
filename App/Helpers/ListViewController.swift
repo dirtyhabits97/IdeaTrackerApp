@@ -43,6 +43,9 @@ class ListViewController: BaseViewController {
             for: .valueChanged
         )
         tableView.refreshControl = refreshControl
+        // tableview configuration
+        tableView.tableHeaderView = UIView()
+        tableView.tableFooterView = UIView()
         // set up the layout
         view.addSubview(tableView)
         tableView.pinToSuperview()

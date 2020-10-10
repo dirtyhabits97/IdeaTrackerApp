@@ -60,4 +60,11 @@ class CategoryListViewModel: ListViewModel<IdeaCategory> {
         }
     }
     
+    func updateCategory(
+        _ category: IdeaCategory,
+        at index: Int
+    ) {
+        // TODO: do this
+    }
+    
 }

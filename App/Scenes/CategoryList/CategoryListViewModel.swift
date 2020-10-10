@@ -64,7 +64,19 @@ class CategoryListViewModel: ListViewModel<IdeaCategory> {
         _ category: IdeaCategory,
         at index: Int
     ) {
-        // TODO: do this
+        isLoading?(true)
+        client.updateCategory(category) { (result) in
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.isLoading?(false)
+                switch result {
+                case .success(let category):
+                    self.onUpdateSuccess?(index, category)
+                case .failure(let error):
+                    self.onFailure?(error)
+                }
+            }
+        }
     }
     
 }

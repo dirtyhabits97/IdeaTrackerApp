@@ -19,9 +19,7 @@ class CategoryListViewController: ListViewController {
         get { dataSource?.displayedItems ?? [] }
         set { dataSource?.displayedItems = newValue }
     }
-    
-    // MARK: - UI elements
-    
+        
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -83,7 +81,9 @@ class CategoryListViewController: ListViewController {
                 else {
                     return
                 }
-                self.viewModel?.updateCategory(self.displayedCategories[idx], at: idx)
+                var copy = self.displayedCategories[idx]
+                copy.name = name
+                self.viewModel?.updateCategory(copy, at: idx)
             }))
             self.present(alert, animated: true)
         }

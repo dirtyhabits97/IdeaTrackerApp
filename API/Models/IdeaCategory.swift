@@ -7,9 +7,9 @@
 
 import Foundation
 
-public struct IdeaCategory: Decodable {
+public struct IdeaCategory: Codable {
     
     public let id: UUID
-    public let name: String
+    public var name: String
     
 }

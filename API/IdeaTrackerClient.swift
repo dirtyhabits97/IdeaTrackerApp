@@ -125,6 +125,18 @@ public struct IdeaTrackerClient {
         client.send(request, completion)
     }
     
+    public func updateCategory(
+        _ category: IdeaCategory,
+        _ completion: @escaping (Result<IdeaCategory, NKError.RequestError>) -> Void
+    ) {
+        let request = Request(url: .adminURL, path: "/categories/\(category.id.uuidString)", method: .put)
+            .addHeader(key: "Authorization", val: "Bearer 9ysy0fEa7oZTlCEGONiAZA==")
+            .addHeader(key: "Content-Type", val: "application/json")
+            .setBody(fromObject: category)
+            .decode(to: IdeaCategory.self)
+        client.send(request, completion)
+    }
+    
 }
 
 extension URL {

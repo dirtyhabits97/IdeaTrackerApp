@@ -72,8 +72,7 @@ class UserListViewModel {
         }
     }
     
-    func deleteUser(withId id: UUID?) {
-        guard let id = id?.uuidString else { return }
+    func deleteUser(withId id: UUID) {
         isLoading?(true)
         client.deleteUser(withId: id) { (result) in
             DispatchQueue.main.async { [weak self] in

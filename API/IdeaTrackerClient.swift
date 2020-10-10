@@ -40,10 +40,10 @@ public struct IdeaTrackerClient {
     }
     
     public func deleteUser(
-        withId id: String,
+        withId id: UUID,
         _ completion: @escaping (Result<IgnoreResponse, NKError.RequestError>) -> Void
     ) {
-        let request = Request(url: .adminURL, path: "/users/\(id)", method: .delete)
+        let request = Request(url: .adminURL, path: "/users/\(id.uuidString)", method: .delete)
             .addHeader(key: "Authorization", val: "Bearer 9ysy0fEa7oZTlCEGONiAZA==")
             .ignoreResponse()
         client.send(request, completion)
@@ -59,7 +59,8 @@ public struct IdeaTrackerClient {
         client.send(request, completion)
     }
     
-    public func saveIdea(
+    // TODO: make this return an idea, so it can be appended
+    public func createIdea(
         _ name: String,
         description: String,
         userId: UUID,
@@ -69,9 +70,9 @@ public struct IdeaTrackerClient {
             .addHeader(key: "Authorization", val: "Bearer 9ysy0fEa7oZTlCEGONiAZA==")
             .addHeader(key: "Content-Type", val: "application/json")
             .setBody(fromObject: CreateIdea(
-                        name: name,
-                        description: description,
-                        userId: userId
+                name: name,
+                description: description,
+                userId: userId
             ))
             .ignoreResponse()
         client.send(request, completion)
@@ -84,6 +85,25 @@ public struct IdeaTrackerClient {
         let request = Request(url: .adminURL, path: "/ideas/\(id)", method: .delete)
             .addHeader(key: "Authorization", val: "Bearer 9ysy0fEa7oZTlCEGONiAZA==")
             .ignoreResponse()
+        client.send(request, completion)
+    }
+    
+    public func getCategories(_ completion: @escaping (Result<[Category], NKError.RequestError>) -> Void) {
+        let request = Request(url: .adminURL, path: "/categories", method: .get)
+            .addHeader(key: "Authorization", val: "Bearer 9ysy0fEa7oZTlCEGONiAZA==")
+            .decode(to: [Category].self)
+        client.send(request, completion)
+    }
+    
+    public func createCategory(
+        _ name: String,
+        _ completion: @escaping (Result<Category, NKError.RequestError>) -> Void
+    ) {
+        let request = Request(url: .adminURL, path: "/categories", method: .post)
+            .addHeader(key: "Authorization", val: "Bearer 9ysy0fEa7oZTlCEGONiAZA==")
+            .addHeader(key: "Content-Type", val: "application/json")
+            .setBody(fromObject: Category(id: nil, name: name))
+            .decode(to: Category.self)
         client.send(request, completion)
     }
     

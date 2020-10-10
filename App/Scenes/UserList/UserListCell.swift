@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import IdeaTrackerAPI
 
-class UserListCell: BaseCell<PublicUserData> {
+class UserListCell: BaseCell<PublicUserData>, ConfigurableCell {
     
     static let reuseIdentifier = "UserListCell"
     

@@ -63,7 +63,7 @@ class CreateIdeaViewModel: ViewModel {
     
     func saveIdea(_ name: String, _ description: String) {
         guard let userId = selectedUser?.id else { return }
-        client.saveIdea(
+        client.createIdea(
             name,
             description: description,
             userId: userId

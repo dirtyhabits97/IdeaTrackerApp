@@ -94,3 +94,10 @@ let httpClient = HTTPClient(urlSession: URLSession(configuration: .ephemeral))
     }, didCancelRequest: { _ in
         print("Request was canceled.")
     })
+
+// TODO: improve this
+protocol ErrorHandler: AnyObject {
+    
+    func handleError(_ message: String)
+    
+}

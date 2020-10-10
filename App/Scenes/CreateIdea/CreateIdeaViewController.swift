@@ -7,12 +7,11 @@
 
 import UIKit
 
-class CreateIdeaViewController: UIViewController {
+class CreateIdeaViewController: BaseViewController {
     
     // MARK: - Properties
     
     var viewModel: CreateIdeaViewModel?
-    weak var erroHandler: ErrorHandler?
     
     private let sections: [Section] = [.name, .description, .user]
     
@@ -35,7 +34,7 @@ class CreateIdeaViewController: UIViewController {
         viewModel?.loadData()
     }
     
-    func setupView() {
+    override func setupView() {
         // navigation attributes
         navigationItem.title = "New Idea"
         navigationItem.largeTitleDisplayMode = .never
@@ -57,7 +56,7 @@ class CreateIdeaViewController: UIViewController {
         tableView.pinToSuperview()
     }
     
-    func setupBindings() {
+    override func setupBindings() {
         viewModel?.onSelectUser = { [weak self] in
             var set = IndexSet()
             set.insert(2)
@@ -66,9 +65,6 @@ class CreateIdeaViewController: UIViewController {
         // TODO: map error handler
         // TODO: map isloading
         // TODO: map create idea error
-        viewModel?.onSaveUserSuccess = { [weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }
     }
     
     // MARK: - Interaction handling

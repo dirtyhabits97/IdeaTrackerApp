@@ -29,9 +29,9 @@ class CreateIdeaViewModel: ViewModel {
     // MARK: - Callbacks
     
     var onSelectUser: (() -> Void)?
-    var onSaveUserSuccess: (() -> Void)?
+    var onCreateIdeaSuccess: ((Idea) -> Void)?
     // special fail case
-    var onSaveUserFailure: ((Error) -> Void)?
+    var onCreateIdeaFailure: ((Error) -> Void)?
     
     // MARK: - Lifecycle
     
@@ -72,10 +72,10 @@ class CreateIdeaViewModel: ViewModel {
                 guard let self = self else { return }
                 self.isLoading?(false)
                 switch result {
-                case .success:
-                    self.onSaveUserSuccess?()
+                case .success(let idea):
+                    self.onCreateIdeaSuccess?(idea)
                 case .failure(let error):
-                    self.onSaveUserFailure?(error)
+                    self.onCreateIdeaFailure?(error)
                 }
             }
         }

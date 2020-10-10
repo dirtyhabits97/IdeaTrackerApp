@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import IdeaTrackerAPI
 
-class IdeaListCell: BaseCell<Idea> {
+class IdeaListCell: BaseCell<Idea>, ConfigurableCell {
     
     // MARK: - Properties
     

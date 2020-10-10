@@ -64,7 +64,7 @@ public struct IdeaTrackerClient {
         _ name: String,
         description: String,
         userId: UUID,
-        _ completion: @escaping (Result<IgnoreResponse, NKError.RequestError>) -> Void
+        _ completion: @escaping (Result<Idea, NKError.RequestError>) -> Void
     ) {
         let request = Request(url: .adminURL, path: "/ideas", method: .post)
             .addHeader(key: "Authorization", val: "Bearer 9ysy0fEa7oZTlCEGONiAZA==")
@@ -74,15 +74,15 @@ public struct IdeaTrackerClient {
                 description: description,
                 userId: userId
             ))
-            .ignoreResponse()
+            .decode(to: Idea.self)
         client.send(request, completion)
     }
     
     public func deleteIdea(
-        withId id: String,
+        withId id: UUID,
         _ completion: @escaping (Result<IgnoreResponse, NKError.RequestError>) -> Void
     ) {
-        let request = Request(url: .adminURL, path: "/ideas/\(id)", method: .delete)
+        let request = Request(url: .adminURL, path: "/ideas/\(id.uuidString)", method: .delete)
             .addHeader(key: "Authorization", val: "Bearer 9ysy0fEa7oZTlCEGONiAZA==")
             .ignoreResponse()
         client.send(request, completion)
@@ -105,6 +105,13 @@ public struct IdeaTrackerClient {
             .setBody(fromObject: Category(id: nil, name: name))
             .decode(to: Category.self)
         client.send(request, completion)
+    }
+    
+    public func deleteCategory(
+        withId id: UUID,
+        _ completion: @escaping (Result<IgnoreResponse, NKError.RequestError>) -> Void
+    ) {
+        // TODO: implement this
     }
     
 }

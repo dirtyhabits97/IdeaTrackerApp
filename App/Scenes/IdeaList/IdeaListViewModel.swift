@@ -47,8 +47,7 @@ class IdeaListViewModel {
         
     }
     
-    func deleteIdea(with id: UUID?) {
-        guard let id = id?.uuidString else { return }
+    func deleteIdea(with id: UUID) {
         // TODO: implement this
         client.deleteIdea(withId: id) { (result) in
             DispatchQueue.main.async { [weak self] in

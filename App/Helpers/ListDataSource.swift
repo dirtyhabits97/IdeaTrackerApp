@@ -23,6 +23,8 @@ class ListDataSource<Item, Cell: ConfigurableCell>: NSObject, UITableViewDataSou
     
     var displayedItems: [Item] = []
     
+    weak var tableView: UITableView?
+    
     // MARK: - Observables
     
     var willDelete: ((Item) -> Void)?
@@ -31,6 +33,7 @@ class ListDataSource<Item, Cell: ConfigurableCell>: NSObject, UITableViewDataSou
     // MARK: - Lifecycle
     
     init(tableView: UITableView) {
+        self.tableView = tableView
         super.init()
         tableView.register(
             Cell.self,
@@ -81,6 +84,16 @@ class ListDataSource<Item, Cell: ConfigurableCell>: NSObject, UITableViewDataSou
     ) {
         tableView.deselectRow(at: indexPath, animated: false)
         didSelect?(displayedItems[indexPath.row])
+    }
+    
+    // MARK: - Helper methods
+    
+    func appendItem(_ item: Item) {
+        displayedItems.append(item)
+        self.tableView?.insertRows(
+            at: [IndexPath(item: self.displayedItems.count-1, section: 0)],
+            with: .automatic
+        )
     }
     
 }

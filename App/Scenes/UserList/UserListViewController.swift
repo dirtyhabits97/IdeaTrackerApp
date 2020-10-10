@@ -60,11 +60,7 @@ class UserListViewController: ListViewController {
         }
         viewModel?.onCreateSuccess = { [weak self] user in
             guard let self = self else { return }
-            self.displayedUsers.append(user)
-            self.tableView.insertRows(
-                at: [IndexPath(item: self.displayedUsers.count-1, section: 0)],
-                with: .automatic
-            )
+            self.dataSource?.appendItem(user)
         }
         viewModel?.onDeleteSuccess = {
             print("deleted user")

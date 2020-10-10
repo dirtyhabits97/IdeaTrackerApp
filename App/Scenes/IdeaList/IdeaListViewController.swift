@@ -8,75 +8,35 @@
 import UIKit
 import IdeaTrackerAPI
 
-class IdeaListViewController: UIViewController {
+class IdeaListViewController: ListViewController {
     
     // MARK: - Properties
-    
-    weak var errorHandler: ErrorHandler?
-    
+        
     var viewModel: IdeaListViewModel?
+    var dataSource: ListDataSource<Idea, IdeaListCell>?
     
-    var displayedIdeas: [Idea] = []
-    
-    // MARK: - UI elements
-    
-    let tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .plain)
-        tableView.estimatedRowHeight = 44
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        return tableView
-    }()
+    var displayedIdeas: [Idea] {
+        get { dataSource?.displayedItems ?? [] }
+        set { dataSource?.displayedItems = newValue }
+    }
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        setupBindings()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         viewModel?.loadData()
     }
     
-    private func setupView() {
-        view.backgroundColor = .white
+    override func setupView() {
+        super.setupView()
         // navigation attributes
         navigationItem.title = "Ideas"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            title: "Edit",
-            style: .plain,
-            target: self,
-            action: #selector(didPressEditModeButton)
-        )
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .add,
-            target: self,
-            action: #selector(didPressAddIdeaButton)
-        )
-        // refresh controller
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(
-            self,
-            action: #selector(didPullToRefresh),
-            for: .valueChanged
-        )
-        tableView.refreshControl = refreshControl
-        // set up the tableview
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.register(
-            IdeaListCell.self,
-            forCellReuseIdentifier: IdeaListCell.reuseIdentifier
-        )
-        // set up the layout
-        view.addSubview(tableView)
-        tableView.pinToSuperview()
+        // create the data source
+        dataSource = ListDataSource(tableView: tableView)
     }
     
-    private func setupBindings() {
+    override func setupBindings() {
+        // MARK: view model bindings
         viewModel?.isLoading = { [weak self] isLoading in
             guard let self = self else { return }
             if isLoading {
@@ -93,79 +53,35 @@ class IdeaListViewController: UIViewController {
         viewModel?.onDeleteSuccess = {
             print("deleted idea")
         }
+        // MARK: data source bindings
+        dataSource?.willDelete = { [weak self] idea in
+            guard let self = self, let id = idea.id else { return }
+            self.viewModel?.deleteIdea(with: id)
+        }
     }
     
     // MARK: - Interaction handling
     
-    @objc func didPullToRefresh() {
+    override func didPullToRefresh() {
         viewModel?.loadData()
     }
     
-    @objc func didPressAddIdeaButton() {
+    override func didPressAddItemButton() {
         // TODO: introduce coordinator
         guard let viewModel = viewModel else { return }
         let viewController = CreateIdeaViewController()
         viewController.viewModel = CreateIdeaViewModel(client: viewModel.client)
+        viewController.viewModel?.onCreateIdeaSuccess = { [weak self] idea in
+            guard let self = self else { return }
+            // go back 1 screen
+            self.navigationController?.popViewController(animated: true)
+            self.dataSource?.appendItem(idea)
+        }
         // TODO: set the error handler from the coordinator
         navigationController?.pushViewController(
             viewController,
             animated: true
         )
-    }
-    
-    @objc func didPressEditModeButton() {
-        tableView.setEditing(!tableView.isEditing, animated: true)
-        if tableView.isEditing {
-            navigationItem.leftBarButtonItem?.title = "Done"
-        } else {
-            navigationItem.leftBarButtonItem?.title = "Edit"
-        }
-    }
-    
-}
-
-extension IdeaListViewController: UITableViewDataSource {
-    
-    func tableView(
-        _ tableView: UITableView,
-        numberOfRowsInSection section: Int
-    ) -> Int {
-        displayedIdeas.count
-    }
-    
-    func tableView(
-        _ tableView: UITableView,
-        cellForRowAt indexPath: IndexPath
-    ) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: IdeaListCell.reuseIdentifier, for: indexPath) as? IdeaListCell else {
-            return UITableViewCell()
-        }
-        cell.configure(for: displayedIdeas[indexPath.row])
-        return cell
-    }
-    
-    func tableView(
-        _ tableView: UITableView,
-        commit editingStyle: UITableViewCell.EditingStyle,
-        forRowAt indexPath: IndexPath
-    ) {
-        guard editingStyle == .delete else { return }
-        // model updates
-        viewModel?.deleteIdea(with: displayedIdeas[indexPath.row].id)
-        // view updates
-        displayedIdeas.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .fade)
-    }
-    
-}
-
-extension IdeaListViewController: UITableViewDelegate {
-    
-    func tableView(
-        _ tableView: UITableView,
-        didSelectRowAt indexPath: IndexPath
-    ) {
-        tableView.deselectRow(at: indexPath, animated: false)
     }
     
 }

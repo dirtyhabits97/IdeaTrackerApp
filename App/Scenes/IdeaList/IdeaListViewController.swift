@@ -57,6 +57,25 @@ class IdeaListViewController: ListViewController {
         dataSource?.willDelete = { [weak self] idea in
             self?.viewModel?.deleteIdea(with: idea.id)
         }
+        dataSource?.didSelect = { [weak self] (idx, idea) in
+            guard let self = self, let viewModel = self.viewModel else { return }
+            let viewController = CreateIdeaViewController()
+            viewController.viewModel = UpdateIdeaViewModel(
+                client: viewModel.client,
+                idea: idea
+            )
+            viewController.viewModel?.onCreateIdeaSuccess = { [weak self] idea in
+                guard let self = self else { return }
+                // go back 1 screen
+                self.navigationController?.popViewController(animated: true)
+                self.dataSource?.replaceItem(at: idx, with: idea)
+            }
+            // TODO: set the error handler from the coordinator
+            self.navigationController?.pushViewController(
+                viewController,
+                animated: true
+            )
+        }
     }
     
     // MARK: - Interaction handling

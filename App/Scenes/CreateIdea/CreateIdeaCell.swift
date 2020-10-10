@@ -1,5 +1,5 @@
 //
-//  CellWithTextField.swift
+//  CreateIdeaCell.swift
 //  app-lib
 //
 //  Created by DIGITAL008 on 10/7/20.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-class CellWithTextField: BaseCell<String> {
+class CreateIdeaCell: BaseCell<CreateIdeaViewController.Section> {
     
-    static let reuseIdentifier: String = "CellWithTextField"
+    static let reuseIdentifier: String = "CreateIdeaCell"
     
     let textfield: UITextField = {
         let textfield = UITextField()
@@ -27,8 +27,21 @@ class CellWithTextField: BaseCell<String> {
         ])
     }
     
-    override func configure(for model: String) {
-        textfield.placeholder = model
+    override func configure(for model: CreateIdeaViewController.Section) {
+        // set the placeholder
+        textfield.placeholder = model.placeholder
+        // check the value to display
+        switch model {
+        case .name(let name):
+            textfield.text = name
+            textfield.isUserInteractionEnabled = true
+        case .description(let description):
+            textfield.text = description
+            textfield.isUserInteractionEnabled = true
+        case .user(let user):
+            textfield.text = user
+            textfield.isUserInteractionEnabled = false
+        }
     }
     
 }

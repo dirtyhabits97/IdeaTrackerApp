@@ -7,14 +7,14 @@
 
 import Foundation
 
-public struct Idea: Decodable {
+public struct Idea: Codable {
     
     // MARK: - Properties
     
     public let id: UUID
-    public let name: String
-    public let description: String
-    public let userId: UUID
+    public var name: String
+    public var description: String
+    public var userId: UUID
     
     // MARK: - Encodable
     
@@ -23,7 +23,10 @@ public struct Idea: Decodable {
         case id
         case name
         case description
+        // when receiving
         case user
+        // when sending
+        case userId
         
     }
     
@@ -45,16 +48,12 @@ public struct Idea: Decodable {
         userId = try userContainer.decode(UUID.self, forKey: .id)
     }
     
-//    public func encode(to encoder: Encoder) throws {
-//        var container = encoder.container(keyedBy: CodingKeys.self)
-//        try container.encode(id, forKey: .id)
-//        try container.encode(name, forKey: .name)
-//        try container.encode(description, forKey: .description)
-//        var userContainer = container.nestedContainer(
-//            keyedBy: UserKeys.self,
-//            forKey: .user
-//        )
-//        try userContainer.encode(userId, forKey: .id)
-//    }
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(name, forKey: .name)
+        try container.encode(description, forKey: .description)
+        try container.encode(userId, forKey: .userId)
+    }
     
 }

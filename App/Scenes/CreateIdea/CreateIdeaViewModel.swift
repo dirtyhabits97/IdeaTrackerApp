@@ -12,14 +12,15 @@ class CreateIdeaViewModel: ViewModel {
     
     // MARK: - Properties
     
-    private let client: IdeaTrackerClient
+    let client: IdeaTrackerClient
     
-    private(set) var users: [PublicUserData] = []
-    private(set) var selectedUser: PublicUserData?
+    var users: [PublicUserData] = []
+    var selectedUser: PublicUserData?
     
     // MARK: - Callbacks
     
-    var onSelectUser: (() -> Void)?
+    var onListSuccess: (([CreateIdeaViewController.Section]) -> Void)?
+    var onSelectUser: ((String) -> Void)?
     var onCreateIdeaSuccess: ((Idea) -> Void)?
     // special fail case
     var onCreateIdeaFailure: ((Error) -> Void)?
@@ -33,6 +34,9 @@ class CreateIdeaViewModel: ViewModel {
     // MARK: - Methods
     
     override func loadData() {
+        // notify the curr sections
+        onListSuccess?([.name(nil), .description(nil), .user(nil)])
+        // async load the user (section #2)
         isLoading?(true)
         client.getUsers { (result) in
             DispatchQueue.main.async { [weak self] in
@@ -43,7 +47,7 @@ class CreateIdeaViewModel: ViewModel {
                     self.users = data
                     data.first.map { user in
                         self.selectedUser = user
-                        self.onSelectUser?()
+                        self.onSelectUser?(user.username)
                     }
                 case .failure(let error):
                     self.onFailure?(error)
@@ -74,7 +78,7 @@ class CreateIdeaViewModel: ViewModel {
     
     func setUser(_ user: PublicUserData) {
         self.selectedUser = user
-        self.onSelectUser?()
+        self.onSelectUser?(user.username)
     }
     
 }

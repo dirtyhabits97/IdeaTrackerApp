@@ -94,6 +94,18 @@ public struct IdeaTrackerClient {
         client.send(request, completion)
     }
     
+    public func updateIdea(
+        _ idea: Idea,
+        _ completion: @escaping (Result<Idea, NKError.RequestError>) -> Void
+    ) {
+        let request = Request(url: .adminURL, path: "/ideas/\(idea.id.uuidString)", method: .put)
+            .addHeader(key: "Authorization", val: "Bearer 9ysy0fEa7oZTlCEGONiAZA==")
+            .addHeader(key: "Content-Type", val: "application/json")
+            .setBody(fromObject: idea)
+            .decode(to: Idea.self)
+        client.send(request, completion)
+    }
+    
     // MARK: - Category methods
     
     public func getCategories(_ completion: @escaping (Result<[IdeaCategory], NKError.RequestError>) -> Void) {

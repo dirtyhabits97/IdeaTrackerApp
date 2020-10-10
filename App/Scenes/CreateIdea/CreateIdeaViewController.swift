@@ -7,13 +7,14 @@
 
 import UIKit
 
+// TODO: improve text handling here
 class CreateIdeaViewController: BaseViewController {
     
     // MARK: - Properties
     
     var viewModel: CreateIdeaViewModel?
     
-    private let sections: [Section] = [.name, .description, .user]
+    private var displayedSections: [Section] = []
     
     // MARK: - UI elements
     
@@ -44,12 +45,13 @@ class CreateIdeaViewController: BaseViewController {
             target: self,
             action: #selector(didPressSaveButton)
         )
+        navigationItem.rightBarButtonItem?.isEnabled = false
         // set up table view
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(
-            CellWithTextField.self,
-            forCellReuseIdentifier: CellWithTextField.reuseIdentifier
+            CreateIdeaCell.self,
+            forCellReuseIdentifier: CreateIdeaCell.reuseIdentifier
         )
         // set up the layout
         view.addSubview(tableView)
@@ -57,10 +59,18 @@ class CreateIdeaViewController: BaseViewController {
     }
     
     override func setupBindings() {
-        viewModel?.onSelectUser = { [weak self] in
+        viewModel?.onSelectUser = { [weak self] user in
+            guard let self = self else { return }
             var set = IndexSet()
             set.insert(2)
-            self?.tableView.reloadSections(set, with: .automatic)
+            self.displayedSections[2] = .user(user)
+            self.tableView.reloadSections(set, with: .automatic)
+            self.navigationItem.rightBarButtonItem?.isEnabled = true
+        }
+        viewModel?.onListSuccess = { [weak self] sections in
+            guard let self = self else { return }
+            self.displayedSections = sections
+            self.tableView.reloadData()
         }
         // TODO: map error handler
         // TODO: map isloading
@@ -74,8 +84,8 @@ class CreateIdeaViewController: BaseViewController {
         let section0 = IndexPath(item: 0, section: 0)
         let section1 = IndexPath(item: 0, section: 1)
         guard
-            let name = (tableView.cellForRow(at: section0) as? CellWithTextField)?.textfield.text,
-            let description = (tableView.cellForRow(at: section1) as? CellWithTextField)?.textfield.text
+            let name = (tableView.cellForRow(at: section0) as? CreateIdeaCell)?.textfield.text,
+            let description = (tableView.cellForRow(at: section1) as? CreateIdeaCell)?.textfield.text
         else {
             return
         }
@@ -87,7 +97,7 @@ class CreateIdeaViewController: BaseViewController {
 extension CreateIdeaViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        sections.count
+        displayedSections.count
     }
     
     func tableView(
@@ -101,20 +111,10 @@ extension CreateIdeaViewController: UITableViewDataSource {
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellWithTextField.reuseIdentifier, for: indexPath) as? CellWithTextField else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CreateIdeaCell.reuseIdentifier, for: indexPath) as? CreateIdeaCell else {
             return UITableViewCell()
         }
-        cell.configure(for: sections[indexPath.section].placeholder)
-        // disable the user interaction in the 3rd section
-        if indexPath.section == 2 {
-            viewModel?.selectedUser.map { user in
-                cell.textfield.placeholder = nil
-                cell.textfield.text = user.username
-            }
-            cell.textfield.isUserInteractionEnabled = false
-        } else {
-            cell.textfield.isUserInteractionEnabled = true
-        }
+        cell.configure(for: displayedSections[indexPath.section])
         return cell
     }
     
@@ -122,7 +122,7 @@ extension CreateIdeaViewController: UITableViewDataSource {
         _ tableView: UITableView,
         titleForHeaderInSection section: Int
     ) -> String? {
-        sections[section].title
+        displayedSections[section].title
     }
     
 }
@@ -135,7 +135,7 @@ extension CreateIdeaViewController: UITableViewDelegate {
     ) {
         tableView.deselectRow(at: indexPath, animated: false)
         // TODO: introduce coordinator
-        guard let users = viewModel?.users else { return }
+        guard let users = viewModel?.users, !users.isEmpty else { return }
         let viewController = SelectUserViewController()
         viewController.users = users
         viewController.onSelectUser = { [weak self] user in
@@ -150,26 +150,30 @@ extension CreateIdeaViewController: UITableViewDelegate {
     
 }
 
-private enum Section {
+extension CreateIdeaViewController {
     
-    case name
-    case description
-    case user
-    
-    var title: String {
-        switch self {
-        case .name: return "Name"
-        case .description: return "Description"
-        case .user: return "User"
+    enum Section {
+        
+        case name(String?)
+        case description(String?)
+        case user(String?)
+        
+        var title: String {
+            switch self {
+            case .name: return "Name"
+            case .description: return "Description"
+            case .user: return "User"
+            }
         }
-    }
-    
-    var placeholder: String {
-        switch self {
-        case .name: return "The name of the idea"
-        case .description: return "A short description of the idea"
-        case .user: return "The owner of this idea"
+        
+        var placeholder: String {
+            switch self {
+            case .name: return "The name of the idea"
+            case .description: return "A short description of the idea"
+            case .user: return "The owner of this idea"
+            }
         }
+        
     }
     
 }

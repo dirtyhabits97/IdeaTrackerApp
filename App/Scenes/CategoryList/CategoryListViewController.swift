@@ -45,7 +45,7 @@ class CategoryListViewController: ListViewController {
                 self.tableView.refreshControl?.endRefreshing()
             }
         }
-        viewModel?.onListSucess = { [weak self] categories in
+        viewModel?.onListSuccess = { [weak self] categories in
             guard let self = self else { return }
             self.displayedCategories = categories
             self.tableView.reloadData()
@@ -59,12 +59,10 @@ class CategoryListViewController: ListViewController {
         }
         // MARK: data source bindings
         dataSource?.willDelete = { [weak self] category in
-            guard let self = self, let id = category.id else { return }
-            self.viewModel?.deleteCategory(with: id)
+            self?.viewModel?.deleteCategory(with: category.id)
         }
         dataSource?.didSelect = { category in
-            guard let id = category.id?.uuidString else { return }
-            UIPasteboard.general.string = id
+            UIPasteboard.general.string = category.id.uuidString
         }
     }
     

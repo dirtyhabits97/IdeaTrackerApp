@@ -28,13 +28,19 @@ public struct IdeaTrackerClient {
     }
     
     public func createUser(
-        _ user: PrivateUserData,
+        _ name: String,
+        username: String,
+        password: String,
         _ completion: @escaping (Result<PublicUserData, NKError.RequestError>) -> Void
     ) {
         let request = Request(url: .adminURL, path: "/users", method: .post)
             .addHeader(key: "Authorization", val: "Bearer 9ysy0fEa7oZTlCEGONiAZA==")
             .addHeader(key: "Content-Type", val: "application/json")
-            .setBody(fromObject: user)
+            .setBody(fromObject: CreateUser(
+                name: name,
+                username: username,
+                password: password
+            ))
             .decode(to: PublicUserData.self)
         client.send(request, completion)
     }
@@ -104,7 +110,7 @@ public struct IdeaTrackerClient {
         let request = Request(url: .adminURL, path: "/categories", method: .post)
             .addHeader(key: "Authorization", val: "Bearer 9ysy0fEa7oZTlCEGONiAZA==")
             .addHeader(key: "Content-Type", val: "application/json")
-            .setBody(fromObject: IdeaCategory(id: nil, name: name))
+            .setBody(fromObject: CreateCategory(name: name))
             .decode(to: IdeaCategory.self)
         client.send(request, completion)
     }
@@ -132,5 +138,29 @@ private struct CreateIdea: Encodable {
     let name: String
     let description: String
     let userId: UUID
+    
+}
+
+private struct CreateUser: Encodable {
+    
+    let name: String
+    let username: String
+    let password: String
+    
+    init(
+        name: String,
+        username: String,
+        password: String
+    ) {
+        self.name = name
+        self.username = username
+        self.password = password
+    }
+    
+}
+
+private struct CreateCategory: Encodable {
+    
+    let name: String
     
 }

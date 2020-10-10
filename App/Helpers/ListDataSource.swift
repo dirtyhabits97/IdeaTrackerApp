@@ -91,7 +91,15 @@ class ListDataSource<Item, Cell: ConfigurableCell>: NSObject, UITableViewDataSou
     func appendItem(_ item: Item) {
         displayedItems.append(item)
         self.tableView?.insertRows(
-            at: [IndexPath(item: self.displayedItems.count-1, section: 0)],
+            at: [IndexPath(row: self.displayedItems.count-1, section: 0)],
+            with: .automatic
+        )
+    }
+    
+    func replaceItem(at index: Int, with item: Item) {
+        displayedItems[index] = item
+        self.tableView?.reloadRows(
+            at: [IndexPath(row: index, section: 0)],
             with: .automatic
         )
     }

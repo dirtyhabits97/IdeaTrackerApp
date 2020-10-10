@@ -55,8 +55,7 @@ class IdeaListViewController: ListViewController {
         }
         // MARK: data source bindings
         dataSource?.willDelete = { [weak self] idea in
-            guard let self = self, let id = idea.id else { return }
-            self.viewModel?.deleteIdea(with: id)
+            self?.viewModel?.deleteIdea(with: idea.id)
         }
     }
     

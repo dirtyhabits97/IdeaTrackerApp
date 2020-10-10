@@ -8,23 +8,7 @@
 import Foundation
 import IdeaTrackerAPI
 
-class CategoryListViewModel: ViewModel {
-    
-    // MARK: - Properties
-    
-    let client: IdeaTrackerClient
-    
-    // MARK: - Callbacks
-    
-    var onListSucess: (([IdeaCategory]) -> Void)?
-    var onCreateSuccess: ((IdeaCategory) -> Void)?
-    var onDeleteSuccess: (() -> Void)?
-    
-    // MARK: - Lifecycle
-    
-    init(client: IdeaTrackerClient) {
-        self.client = client
-    }
+class CategoryListViewModel: ListViewModel<IdeaCategory> {
     
     // MARK: - Methods
     
@@ -36,7 +20,7 @@ class CategoryListViewModel: ViewModel {
                 self.isLoading?(false)
                 switch result {
                 case .success(let data):
-                    self.onListSucess?(data)
+                    self.onListSuccess?(data)
                 case .failure(let error):
                     self.onFailure?(error)
                 }

@@ -53,7 +53,7 @@ class UserListViewController: ListViewController {
             message += "error:\n\(error)"
             self.errorHandler?.handleError(message)
         }
-        viewModel?.onListSucess = { [weak self] users in
+        viewModel?.onListSuccess = { [weak self] users in
             guard let self = self else { return }
             self.displayedUsers = users
             self.tableView.reloadData()
@@ -67,12 +67,10 @@ class UserListViewController: ListViewController {
         }
         // MARK: data source bindings
         dataSource?.willDelete = { [weak self] user in
-            guard let self = self, let id = user.id else { return }
-            self.viewModel?.deleteUser(withId: id)
+            self?.viewModel?.deleteUser(withId: user.id)
         }
         dataSource?.didSelect = { user in
-            guard let id = user.id?.uuidString else { return }
-            UIPasteboard.general.string = id
+            UIPasteboard.general.string = user.id.uuidString
         }
     }
     

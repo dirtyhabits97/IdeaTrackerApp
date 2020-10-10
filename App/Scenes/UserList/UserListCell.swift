@@ -57,11 +57,7 @@ class UserListCell: BaseCell<PublicUserData>, ConfigurableCell {
     
     override func configure(for user: PublicUserData) {
         usernameLabel.text = user.username
-        var text = user.name
-        if let id = user.id?.shortString {
-            text += " (\(id))"
-        }
-        nameLabel.text = text
+        nameLabel.text = "\(user.name) (\(user.id.shortString))"
     }
     
 }

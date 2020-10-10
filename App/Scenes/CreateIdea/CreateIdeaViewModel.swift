@@ -8,15 +8,6 @@
 import Foundation
 import IdeaTrackerAPI
 
-class ViewModel {
-    
-    var isLoading: ((Bool) -> Void)?
-    var onFailure: ((Error) -> Void)?
-    
-    func loadData() { } // override this
-    
-}
-
 class CreateIdeaViewModel: ViewModel {
     
     // MARK: - Properties

@@ -55,10 +55,7 @@ class CategoryListCell: BaseCell<IdeaCategory>, ConfigurableCell {
     
     override func configure(for category: IdeaCategory) {
         nameLabel.text = category.name
-        if let id = category.id?.shortString {
-            idLabel.text = "(\(id))"
-        }
-        idLabel.isHidden = category.id == nil
+        idLabel.text = "(\(category.id.shortString))"
     }
     
 }

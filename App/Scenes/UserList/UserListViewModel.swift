@@ -8,30 +8,11 @@
 import Foundation
 import IdeaTrackerAPI
 
-class UserListViewModel {
-    
-    // MARK: - Properties
-    
-    private let client: IdeaTrackerClient
-    
-    // MARK: - Callbacks
-    
-    var isLoading: ((Bool) -> Void)?
-    var onFailure: ((Error) -> Void)?
-    
-    var onListSucess: (([PublicUserData]) -> Void)?
-    var onCreateSuccess: ((PublicUserData) -> Void)?
-    var onDeleteSuccess: (() -> Void)?
-    
-    // MARK: - Lifecycle
-    
-    init(client: IdeaTrackerClient) {
-        self.client = client
-    }
+class UserListViewModel: ListViewModel<PublicUserData> {
     
     // MARK: - Methods
     
-    func loadData() {
+    override func loadData() {
         isLoading?(true)
         client.getUsers { (result) in
             DispatchQueue.main.async { [weak self] in
@@ -39,7 +20,7 @@ class UserListViewModel {
                 self.isLoading?(false)
                 switch result {
                 case .success(let data):
-                    self.onListSucess?(data)
+                    self.onListSuccess?(data)
                 case .failure(let error):
                     self.onFailure?(error)
                 }
@@ -52,13 +33,12 @@ class UserListViewModel {
         username: String,
         password: String
     ) {
-        let data = PrivateUserData(
-            name: name,
+        isLoading?(true)
+        client.createUser(
+            name,
             username: username,
             password: password
-        )
-        isLoading?(true)
-        client.createUser(data) { (result) in
+        ) { (result) in
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.isLoading?(false)

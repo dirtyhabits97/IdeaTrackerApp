@@ -15,49 +15,33 @@ class UserListCell: BaseCell<PublicUserData>, ConfigurableCell {
     
     // MARK: - UI elements
     
-    let stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 2
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
-    let usernameLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .headline)
-        label.numberOfLines = 1
-        return label
-    }()
-    
-    let nameLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .systemGray
-        label.font = UIFont.preferredFont(forTextStyle: .footnote)
-        label.numberOfLines = 1
-        return label
+    let containerView: TitleWithIdView = {
+        let view = TitleWithIdView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     // MARK: - Lifecycle
     
     override func initializeView() {
-        contentView.addSubview(stackView)
-        stackView.addArrangedSubview(usernameLabel)
-        stackView.addArrangedSubview(nameLabel)
+        contentView.addSubview(containerView)
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
         ])
     }
     
     // MARK: - Methods
     
     override func configure(for user: PublicUserData) {
-        usernameLabel.text = user.username
-        nameLabel.text = "\(user.name) (\(user.id.shortString))"
+        containerView.titleLabel.text = user.username
+        var id = ""
+        id += "ID: \(user.id.shortString)\n"
+        id += "NAME: \(user.name)"
+        containerView.idLabel.text = id
     }
     
 }

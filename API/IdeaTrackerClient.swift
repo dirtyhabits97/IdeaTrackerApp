@@ -88,22 +88,24 @@ public struct IdeaTrackerClient {
         client.send(request, completion)
     }
     
-    public func getCategories(_ completion: @escaping (Result<[Category], NKError.RequestError>) -> Void) {
+    // MARK: - Category methods
+    
+    public func getCategories(_ completion: @escaping (Result<[IdeaCategory], NKError.RequestError>) -> Void) {
         let request = Request(url: .adminURL, path: "/categories", method: .get)
             .addHeader(key: "Authorization", val: "Bearer 9ysy0fEa7oZTlCEGONiAZA==")
-            .decode(to: [Category].self)
+            .decode(to: [IdeaCategory].self)
         client.send(request, completion)
     }
     
     public func createCategory(
         _ name: String,
-        _ completion: @escaping (Result<Category, NKError.RequestError>) -> Void
+        _ completion: @escaping (Result<IdeaCategory, NKError.RequestError>) -> Void
     ) {
         let request = Request(url: .adminURL, path: "/categories", method: .post)
             .addHeader(key: "Authorization", val: "Bearer 9ysy0fEa7oZTlCEGONiAZA==")
             .addHeader(key: "Content-Type", val: "application/json")
-            .setBody(fromObject: Category(id: nil, name: name))
-            .decode(to: Category.self)
+            .setBody(fromObject: IdeaCategory(id: nil, name: name))
+            .decode(to: IdeaCategory.self)
         client.send(request, completion)
     }
     
@@ -111,7 +113,10 @@ public struct IdeaTrackerClient {
         withId id: UUID,
         _ completion: @escaping (Result<IgnoreResponse, NKError.RequestError>) -> Void
     ) {
-        // TODO: implement this
+        let request = Request(url: .adminURL, path: "/categories/\(id.uuidString)", method: .delete)
+            .addHeader(key: "Authorization", val: "Bearer 9ysy0fEa7oZTlCEGONiAZA==")
+            .ignoreResponse()
+        client.send(request, completion)
     }
     
 }

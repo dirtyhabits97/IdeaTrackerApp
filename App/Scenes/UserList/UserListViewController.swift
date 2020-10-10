@@ -79,7 +79,7 @@ class UserListViewController: ListViewController {
     // MARK: - Interaction handling
     
     override func didPressAddItemButton() {
-        let alert = UIAlertController(title: "Add user", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: "New user", message: nil, preferredStyle: .alert)
         alert.addTextField(configurationHandler: { $0.placeholder = "name" })
         alert.addTextField(configurationHandler: { $0.placeholder = "username" })
         alert.addTextField(configurationHandler: { $0.placeholder = "password" })

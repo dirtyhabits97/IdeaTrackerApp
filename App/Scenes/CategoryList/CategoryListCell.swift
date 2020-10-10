@@ -1,17 +1,17 @@
 //
-//  UserListCell.swift
-//  app-lib
+//  CategoryListCell.swift
+//  IdeaTrackerAppLib
 //
-//  Created by DIGITAL008 on 10/4/20.
+//  Created by DIGITAL008 on 10/9/20.
 //
 
 import Foundation
 import UIKit
 import IdeaTrackerAPI
 
-class UserListCell: BaseCell<PublicUserData>, ConfigurableCell {
+class CategoryListCell: BaseCell<IdeaCategory>, ConfigurableCell {
     
-    static let reuseIdentifier = "UserListCell"
+    static let reuseIdentifier: String = "CategoryListCell"
     
     // MARK: - UI elements
     
@@ -23,14 +23,14 @@ class UserListCell: BaseCell<PublicUserData>, ConfigurableCell {
         return stackView
     }()
     
-    let usernameLabel: UILabel = {
+    let nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .headline)
         label.numberOfLines = 1
         return label
     }()
     
-    let nameLabel: UILabel = {
+    let idLabel: UILabel = {
         let label = UILabel()
         label.textColor = .systemGray
         label.font = UIFont.preferredFont(forTextStyle: .footnote)
@@ -42,8 +42,8 @@ class UserListCell: BaseCell<PublicUserData>, ConfigurableCell {
     
     override func initializeView() {
         contentView.addSubview(stackView)
-        stackView.addArrangedSubview(usernameLabel)
         stackView.addArrangedSubview(nameLabel)
+        stackView.addArrangedSubview(idLabel)
         
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
@@ -53,15 +53,12 @@ class UserListCell: BaseCell<PublicUserData>, ConfigurableCell {
         ])
     }
     
-    // MARK: - Methods
-    
-    override func configure(for user: PublicUserData) {
-        usernameLabel.text = user.username
-        var text = user.name
-        if let id = user.id?.shortString {
-            text += " (\(id))"
+    override func configure(for category: IdeaCategory) {
+        nameLabel.text = category.name
+        if let id = category.id?.shortString {
+            idLabel.text = "(\(id))"
         }
-        nameLabel.text = text
+        idLabel.isHidden = category.id == nil
     }
     
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Category: Codable {
+public struct IdeaCategory: Codable {
     
     public let id: UUID?
     public let name: String

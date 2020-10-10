@@ -43,10 +43,18 @@ class TabBarController: UITabBarController {
         let ideaListNavController = UINavigationController(rootViewController: ideaListViewController)
         ideaListNavController.navigationBar.prefersLargeTitles = true
         ideaListNavController.tabBarItem.title = "Ideas"
+        // ideas controller
+        let categoryListViewController = CategoryListViewController()
+        categoryListViewController.errorHandler = self
+        categoryListViewController.viewModel = CategoryListViewModel(client: client)
+        let categoryListNavController = UINavigationController(rootViewController: categoryListViewController)
+        categoryListNavController.navigationBar.prefersLargeTitles = true
+        categoryListNavController.tabBarItem.title = "Categories"
         // set the viewcontrollers
         viewControllers = [
             userListNavController,
-            ideaListNavController
+            ideaListNavController,
+            categoryListNavController
         ]
     }
     

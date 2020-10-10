@@ -113,9 +113,6 @@ extension CreateIdeaViewController: UITableViewDataSource {
             }
             cell.textfield.isUserInteractionEnabled = false
         } else {
-            if indexPath.section == 1 {
-                
-            }
             cell.textfield.isUserInteractionEnabled = true
         }
         return cell

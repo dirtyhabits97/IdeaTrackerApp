@@ -1,8 +1,9 @@
 targets:
-  - "//App:IdeaTrackerApp"
+  - "//App:IdeaTracker"
+  - "//Admin:AdminIdeaTracker"
   - "//API:IdeaTrackerAPI"
 
 projects:
-  "IdeaTrackerApp":
+  "IdeaTracker":
     paths:
       - "**"

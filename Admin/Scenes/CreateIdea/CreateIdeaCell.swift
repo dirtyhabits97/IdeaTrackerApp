@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Utils
 
 class CreateIdeaCell: BaseCell<CreateIdeaViewController.Section> {
     

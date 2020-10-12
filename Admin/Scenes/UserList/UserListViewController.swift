@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Utils
 import IdeaTrackerAPI
 
 // TODO: create toast view to notify changes

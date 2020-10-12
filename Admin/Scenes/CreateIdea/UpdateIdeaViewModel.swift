@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Utils
 import IdeaTrackerAPI
 
 // TODO: store the string as the user writes in the viewmodel
@@ -58,11 +59,13 @@ class UpdateIdeaViewModel: CreateIdeaViewModel {
     }
     
     override func saveIdea(_ name: String, _ description: String) {
+        // TODO: add some kind of validation
+        // compare original vs modified
         // make sure something changed
-        if name == idea.name && idea.description == description {
-            onCreateIdeaSuccess?(idea)
-            return
-        }
+//        if name == idea.name && idea.description == description {
+//            onCreateIdeaSuccess?(idea)
+//            return
+//        }
         idea.name = name
         idea.description = description
         client.updateIdea(idea) { (result) in

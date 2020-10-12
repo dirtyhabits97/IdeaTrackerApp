@@ -1,7 +1,7 @@
 targets:
   - "//App:IdeaTracker"
   - "//Admin:AdminIdeaTracker"
-  - "//API:IdeaTrackerAPI"
+  - "//Shared:Shared"
 
 projects:
   "IdeaTracker":

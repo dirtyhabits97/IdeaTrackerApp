@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Utils
 import IdeaTrackerAPI
 
 class IdeaListViewController: ListViewController {

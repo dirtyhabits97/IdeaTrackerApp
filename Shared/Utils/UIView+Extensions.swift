@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension UIView {
+public extension UIView {
     
     func pinToSuperview(margin: CGFloat = .zero) {
         guard let superview = superview else { return }

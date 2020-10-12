@@ -18,5 +18,8 @@ swift_library(
         "**/*.swift"
     ]),
     visibility = ["//visibility:public"],
-    deps = ["//Carthage:LeanNetworkKit", "//API:IdeaTrackerAPI"]
+    deps = [
+        "//Carthage:LeanNetworkKit", 
+        "//Shared:Shared"
+    ]
 )

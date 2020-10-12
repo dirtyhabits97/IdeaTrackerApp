@@ -8,11 +8,11 @@
 import Foundation
 import UIKit
 
-class BaseCell<Model>: UITableViewCell {
+open class BaseCell<Model>: UITableViewCell {
     
     // MARK: - Lifecycle
     
-    override init(
+    public override init(
         style: UITableViewCell.CellStyle,
         reuseIdentifier: String?
     ) {
@@ -20,13 +20,13 @@ class BaseCell<Model>: UITableViewCell {
         initializeView()
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         super.init(coder: coder)
         initializeView()
     }
     
-    func initializeView() { }
+    open func initializeView() { }
     
-    func configure(for model: Model) { }
+    open func configure(for model: Model) { }
     
 }

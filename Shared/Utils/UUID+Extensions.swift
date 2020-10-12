@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension UUID {
+public extension UUID {
     
     var shortString: String {
         let start = uuidString.startIndex

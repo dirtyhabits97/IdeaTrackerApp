@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Utils
 
 // TODO: improve text handling here
 class CreateIdeaViewController: BaseViewController {

@@ -7,24 +7,31 @@
 
 import UIKit
 
-class BaseViewController: UIViewController {
+// TODO: improve this
+public protocol ErrorHandler: AnyObject {
+    
+    func handleError(_ message: String)
+    
+}
+
+open class BaseViewController: UIViewController {
     
     // MARK: - Properties
     
-    weak var errorHandler: ErrorHandler?
+    public weak var errorHandler: ErrorHandler?
     
     // MARK: - Lifecycle
     
-    override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupBindings()
     }
     
-    func setupView() {
+    open func setupView() {
         view.backgroundColor = .white
     }
     
-    func setupBindings() { }
+    open func setupBindings() { }
     
 }

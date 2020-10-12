@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Utils
 import IdeaTrackerAPI
 
 class UserListCell: BaseCell<PublicUserData>, ConfigurableCell {

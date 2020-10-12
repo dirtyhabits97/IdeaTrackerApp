@@ -1,25 +1,18 @@
 //
-//  IdeaTrackerAPI.swift
-//  IdeaTrackerApp
+//  IdeaTrackerClient+Admin.swift
+//  IdeaTracker
 //
-//  Created by DIGITAL008 on 9/30/20.
+//  Created by DIGITAL008 on 10/11/20.
 //
 
 import Foundation
 import LeanNetworkKit
 
-public struct IdeaTrackerClient {
-    
-    private unowned let client: HTTPClient
-    private static let token = "qi6IWbrB0m2GeSa3jXHnkw=="
-    
-    public init(client: HTTPClient) {
-        self.client = client
-    }
+public extension IdeaTrackerClient {
     
     // MARK: - User methods
     
-    public func getUsers(_ completion: @escaping (Result<[PublicUserData], NKError.RequestError>) -> Void) {
+    func getUsers(_ completion: @escaping (Result<[PublicUserData], NKError.RequestError>) -> Void) {
         let request = Request(url: .adminURL, path: "/users", method: .get)
             // TODO: find a better way to get this token
             .addHeader(key: "Authorization", val: "Bearer 9ysy0fEa7oZTlCEGONiAZA==")
@@ -27,7 +20,7 @@ public struct IdeaTrackerClient {
         client.send(request, completion)
     }
     
-    public func createUser(
+    func createUser(
         _ name: String,
         username: String,
         password: String,
@@ -45,7 +38,7 @@ public struct IdeaTrackerClient {
         client.send(request, completion)
     }
     
-    public func deleteUser(
+    func deleteUser(
         withId id: UUID,
         _ completion: @escaping (Result<IgnoreResponse, NKError.RequestError>) -> Void
     ) {
@@ -55,7 +48,7 @@ public struct IdeaTrackerClient {
         client.send(request, completion)
     }
     
-    public func updateUser(
+    func updateUser(
         _ user: PublicUserData,
         password: String,
         _ completion: @escaping (Result<PublicUserData, NKError.RequestError>) -> Void
@@ -75,7 +68,7 @@ public struct IdeaTrackerClient {
     
     // MARK: - Idea methods
     
-    public func getIdeas(_ completion: @escaping (Result<[Idea], NKError.RequestError>) -> Void) {
+    func getIdeas(_ completion: @escaping (Result<[Idea], NKError.RequestError>) -> Void) {
         let request = Request(url: .adminURL, path: "/ideas", method: .get)
             // TODO: find a better way to get this token
             .addHeader(key: "Authorization", val: "Bearer 9ysy0fEa7oZTlCEGONiAZA==")
@@ -84,7 +77,7 @@ public struct IdeaTrackerClient {
     }
     
     // TODO: make this return an idea, so it can be appended
-    public func createIdea(
+    func createIdea(
         _ name: String,
         description: String,
         userId: UUID,
@@ -102,7 +95,7 @@ public struct IdeaTrackerClient {
         client.send(request, completion)
     }
     
-    public func deleteIdea(
+    func deleteIdea(
         withId id: UUID,
         _ completion: @escaping (Result<IgnoreResponse, NKError.RequestError>) -> Void
     ) {
@@ -112,7 +105,7 @@ public struct IdeaTrackerClient {
         client.send(request, completion)
     }
     
-    public func updateIdea(
+    func updateIdea(
         _ idea: Idea,
         _ completion: @escaping (Result<Idea, NKError.RequestError>) -> Void
     ) {
@@ -126,14 +119,14 @@ public struct IdeaTrackerClient {
     
     // MARK: - Category methods
     
-    public func getCategories(_ completion: @escaping (Result<[IdeaCategory], NKError.RequestError>) -> Void) {
+    func getCategories(_ completion: @escaping (Result<[IdeaCategory], NKError.RequestError>) -> Void) {
         let request = Request(url: .adminURL, path: "/categories", method: .get)
             .addHeader(key: "Authorization", val: "Bearer 9ysy0fEa7oZTlCEGONiAZA==")
             .decode(to: [IdeaCategory].self)
         client.send(request, completion)
     }
     
-    public func createCategory(
+    func createCategory(
         _ name: String,
         _ completion: @escaping (Result<IdeaCategory, NKError.RequestError>) -> Void
     ) {
@@ -145,7 +138,7 @@ public struct IdeaTrackerClient {
         client.send(request, completion)
     }
     
-    public func deleteCategory(
+    func deleteCategory(
         withId id: UUID,
         _ completion: @escaping (Result<IgnoreResponse, NKError.RequestError>) -> Void
     ) {
@@ -155,7 +148,7 @@ public struct IdeaTrackerClient {
         client.send(request, completion)
     }
     
-    public func updateCategory(
+    func updateCategory(
         _ category: IdeaCategory,
         _ completion: @escaping (Result<IdeaCategory, NKError.RequestError>) -> Void
     ) {

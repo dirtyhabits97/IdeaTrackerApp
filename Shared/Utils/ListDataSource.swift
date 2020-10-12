@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol ConfigurableCell: UITableViewCell {
+public protocol ConfigurableCell: UITableViewCell {
     
     associatedtype Model
     
@@ -17,22 +17,28 @@ protocol ConfigurableCell: UITableViewCell {
     
 }
 
-class ListDataSource<Item, Cell: ConfigurableCell>: NSObject, UITableViewDataSource, UITableViewDelegate where Cell.Model == Item {
+public final class ListDataSource<
+    Item,
+    Cell: ConfigurableCell
+>:
+    NSObject, UITableViewDataSource, UITableViewDelegate
+
+where Cell.Model == Item {
     
     // MARK: - Properties
     
-    var displayedItems: [Item] = []
+    public var displayedItems: [Item] = []
     
-    weak var tableView: UITableView?
+    private weak var tableView: UITableView?
     
     // MARK: - Observables
     
-    var willDelete: ((Item) -> Void)?
-    var didSelect:  ((Int, Item) -> Void)?
+    public var willDelete: ((Item) -> Void)?
+    public var didSelect:  ((Int, Item) -> Void)?
     
     // MARK: - Lifecycle
     
-    init(tableView: UITableView) {
+    public init(tableView: UITableView) {
         self.tableView = tableView
         super.init()
         tableView.register(
@@ -47,14 +53,14 @@ class ListDataSource<Item, Cell: ConfigurableCell>: NSObject, UITableViewDataSou
     
     // MARK: - DataSource methods
     
-    func tableView(
+    public func tableView(
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
         displayedItems.count
     }
     
-    func tableView(
+    public func tableView(
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
@@ -65,7 +71,7 @@ class ListDataSource<Item, Cell: ConfigurableCell>: NSObject, UITableViewDataSou
         return cell
     }
     
-    func tableView(
+    public func tableView(
         _ tableView: UITableView,
         commit editingStyle: UITableViewCell.EditingStyle,
         forRowAt indexPath: IndexPath
@@ -80,7 +86,7 @@ class ListDataSource<Item, Cell: ConfigurableCell>: NSObject, UITableViewDataSou
     
     // MARK: - Delete methods
     
-    func tableView(
+    public func tableView(
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath
     ) {
@@ -90,7 +96,7 @@ class ListDataSource<Item, Cell: ConfigurableCell>: NSObject, UITableViewDataSou
     
     // MARK: - Helper methods
     
-    func appendItem(_ item: Item) {
+    public func appendItem(_ item: Item) {
         displayedItems.append(item)
         self.tableView?.insertRows(
             at: [IndexPath(row: self.displayedItems.count-1, section: 0)],
@@ -98,7 +104,7 @@ class ListDataSource<Item, Cell: ConfigurableCell>: NSObject, UITableViewDataSou
         )
     }
     
-    func replaceItem(at index: Int, with item: Item) {
+    public func replaceItem(at index: Int, with item: Item) {
         displayedItems[index] = item
         self.tableView?.reloadRows(
             at: [IndexPath(row: index, section: 0)],

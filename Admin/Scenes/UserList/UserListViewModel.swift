@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Utils
 import IdeaTrackerAPI
 
 class UserListViewModel: ListViewModel<PublicUserData> {

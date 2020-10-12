@@ -7,11 +7,11 @@
 
 import UIKit
 
-class ListViewController: BaseViewController {
+open class ListViewController: BaseViewController {
     
     // MARK: - UI elements
     
-    let tableView: UITableView = {
+    public let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableView.automaticDimension
@@ -21,7 +21,7 @@ class ListViewController: BaseViewController {
     
     // MARK: - Lifecycle
     
-    override func setupView() {
+    open override func setupView() {
         super.setupView()
         // navigation items
         navigationItem.leftBarButtonItem = UIBarButtonItem(
@@ -53,11 +53,11 @@ class ListViewController: BaseViewController {
     
     // MARK: - Interaction handling
     
-    @objc func didPressAddItemButton() {
+    @objc open func didPressAddItemButton() {
         // TODO: override this
     }
     
-    @objc func didPressEditModeButton() {
+    @objc open func didPressEditModeButton() {
         tableView.setEditing(!tableView.isEditing, animated: true)
         if tableView.isEditing {
             navigationItem.leftBarButtonItem?.title = "Done"
@@ -66,7 +66,7 @@ class ListViewController: BaseViewController {
         }
     }
     
-    @objc func didPullToRefresh() {
+    @objc open func didPullToRefresh() {
         // TODO: override this
     }
     

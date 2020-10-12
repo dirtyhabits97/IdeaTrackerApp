@@ -18,9 +18,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let window = UIWindow()
-        let rootViewController = LoginViewController()
-        rootViewController.viewModel = LoginViewModel(client: client)
-        window.rootViewController = rootViewController
+        // 1. check if the token exists
+        if UserDefaults.standard.string(forKey: IdeaTrackerClient.userTokenStorageKey) != nil {
+            window.rootViewController = GreetingsViewController()
+        } else {
+            let rootViewController = LoginViewController()
+            rootViewController.viewModel = LoginViewModel(client: client)
+            window.rootViewController = rootViewController
+        }
         window.makeKeyAndVisible()
         self.window = window
         return true

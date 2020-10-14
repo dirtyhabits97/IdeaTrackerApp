@@ -66,6 +66,7 @@ class TabBarController: UITabBarController {
 extension TabBarController: ErrorHandler {
     
     func handleError(_ message: String) {
+        errorAlert.message = message
         present(errorAlert, animated: true, completion: nil)
     }
     
